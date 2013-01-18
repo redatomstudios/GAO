@@ -1,0 +1,57 @@
+GAO Structure
+-------------
+
+- All funds are transferred directly to Chris's account
+
+Workflow:
+
+Frontend: Logo blah blah blah
+
+Backend: 
+	- Modify OT to accept multiple templates
+		> TEMPLATES TABLE
+			> Template file
+			> CMS file
+
+Homepage
+	- Slider slides
+	- Slide information
+	- Splash text
+
+About us
+	- Splash Image
+	- Body Text
+
+
+Templates[folder]
+	[template name]
+		viewTemp.php
+		cmsTemp.php
+
+Table Structures
+================
+
+Templates
+---------
+- Template Name
+- Template View
+- CMS View
+- DB_tableName
+
+
+userControl
+-----------
+- UID
+- Username
+- Password
+- Salt
+- fundID
+
+fundControl
+-----------
+- fundID
+- name
+- targetAmount
+- collectedAmount
+- templateName
+- templateID

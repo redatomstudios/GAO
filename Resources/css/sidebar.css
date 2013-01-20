@@ -1,0 +1,16 @@
+#bodyWrap > nav {
+	width: 234px;
+	background: #EAF9FD;
+	padding: 180px 13px 20px;
+	box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.5);
+}
+
+#bodyWrap > nav li {
+	line-height: 2em;
+	padding: 0 10px;
+	border-top: solid thin rgba(0, 0, 0, 0.1);
+}
+
+#bodyWrap > nav li:first-child {
+	border: none;
+}

@@ -5,13 +5,14 @@ class Home extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
-		//$this->load->model();
+		$this->load->helper('url');
 	}
 
 	public function index() {
 		$this->load->view("public/header");
 		$this->load->view("public/sidebar");
 		$this->load->view("public/home");
+		$this->load->view("public/footer");
 	}
 
 }

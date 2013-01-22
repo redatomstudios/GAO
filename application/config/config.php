@@ -224,11 +224,8 @@ $config['cache_path'] = '';
 | MUST set an encryption key.  See the user guide for info.
 |
 */
-<<<<<<< HEAD
-$config['encryption_key'] = 'redAtomStudios';
-=======
+
 $config['encryption_key'] = 'udgq92g8hsadd32w';
->>>>>>> 6ab1d12b226308c5f088dd15f58d1090bd591667
 
 /*
 |--------------------------------------------------------------------------

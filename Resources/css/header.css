@@ -1,0 +1,19 @@
+#headerLogo {
+	margin: -90px 0 -143px -35px;
+}
+
+#headerNav {
+	position: relative;
+	float: right;
+}
+
+#headerNav li {
+	float: left;
+	padding: 0 10px;
+	line-height: 2em;
+	border-left: solid thin rgba(0, 0, 0, 0.2);
+}
+
+#headerNav li:first-child {
+	border: none;
+}

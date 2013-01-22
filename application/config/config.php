@@ -224,7 +224,11 @@ $config['cache_path'] = '';
 | MUST set an encryption key.  See the user guide for info.
 |
 */
+<<<<<<< HEAD
 $config['encryption_key'] = 'redAtomStudios';
+=======
+$config['encryption_key'] = 'udgq92g8hsadd32w';
+>>>>>>> 6ab1d12b226308c5f088dd15f58d1090bd591667
 
 /*
 |--------------------------------------------------------------------------
@@ -244,10 +248,10 @@ $config['encryption_key'] = 'redAtomStudios';
 | 'sess_time_to_update'		= how many seconds between CI refreshing Session Information
 |
 */
-$config['sess_cookie_name']		= 'ci_session';
+$config['sess_cookie_name']		= 'gao_ticket';
 $config['sess_expiration']		= 7200;
 $config['sess_expire_on_close']	= FALSE;
-$config['sess_encrypt_cookie']	= FALSE;
+$config['sess_encrypt_cookie']	= TRUE;
 $config['sess_use_database']	= FALSE;
 $config['sess_table_name']		= 'ci_sessions';
 $config['sess_match_ip']		= FALSE;

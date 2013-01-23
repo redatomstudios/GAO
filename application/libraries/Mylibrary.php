@@ -32,7 +32,7 @@ class Mylibrary {
                 $error = 0;
                 if($th->upload->do_upload('filename')){
                     $uploadData = $th->upload->data();
-                    $data[] = array(
+                    $data = array(
                         'filename' => $uploadData['file_name'],
                         'size' => $uploadData['file_size']
                         );

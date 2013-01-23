@@ -43,13 +43,14 @@ class Test extends CI_Controller {
 			$this->load->library('mylibrary');
 			echo "<pre>";
 
-			$templateName = urlencode($post['templateName']);
+			$templateName = preg_replace('/[^a-zA-Z0-9]/', '_', $post['templateName']);
 			$d = $this->mylibrary->uploader($templateName, 'templateView');
+			// print_r($d);
 			$data['templateView'] = $d['filename'];
 			$d = $this->mylibrary->uploader($templateName, 'cmsView');
 			$data['cmsView'] = $d['filename'];
 			$data['templateName'] = $templateName;
-
+			$fields = new array();
 			for($i=0; $i>sizeof($post['fieldName']);$i++){
 				$fields[$i] = array(
 					'fieldName' => $post[$i]->fieldName,

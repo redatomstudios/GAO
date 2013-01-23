@@ -41,7 +41,7 @@ class Test extends CI_Controller {
 
 		else{
 			$this->load->library('mylibrary');
-			echo "<pre>";
+			// echo "<pre>";
 
 			$templateName = preg_replace('/[^a-zA-Z0-9]/', '_', $post['templateName']);
 			$d = $this->mylibrary->uploader($templateName, 'templateView');
@@ -50,14 +50,15 @@ class Test extends CI_Controller {
 			$d = $this->mylibrary->uploader($templateName, 'cmsView');
 			$data['cmsView'] = $d['filename'];
 			$data['templateName'] = $templateName;
-			$fields = new array();
-			for($i=0; $i>sizeof($post['fieldName']);$i++){
+			$fields = array();
+			// print_r($post);
+			for($i=1; $i<=sizeof($post['fieldName']);$i++){
 				$fields[$i] = array(
-					'fieldName' => $post[$i]->fieldName,
-					'fieldType' => $post[$i]->fieldType);
+					'fieldName' => $post['fieldName'][$i],
+					'fieldType' => $post['fieldType'][$i]);
 			}
 			$this->testModel->createTemplate($data, $fields);
-			print_r($post);
+			// print_r($post);
 		}
 
 	}

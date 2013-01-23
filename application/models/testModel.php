@@ -32,6 +32,8 @@ class TestModel extends CI_Model{
 		$query = substr($query, 0, strlen($query)-2);
 
 		$query .= ')';
-		echo $query;
+		// echo $query;
+
+		$this->db->query($query);
 	}
 }

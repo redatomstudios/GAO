@@ -1,0 +1,42 @@
+1. Create Templates
+2. Create Views
+3. Load views to templates
+
+1. Create Template
+   ===============
+
+   New Template Form
+   -----------------
+   - Template Name
+   - Template View PHP File
+   - Template CMS PHP File
+   - Template Field Names
+   - Template Field Types
+
+   Steps
+   -----
+   1. Create an entry in templates table and get the id
+   2. Create a folder with that id(or template name) in views/templates/ folder *
+   3. Copy the two files in the input form to this folder and get their filenames   <==> #1
+   4. Update the templates table with the above two filenames
+   5. Create table with table name, url_encode(template name) *
+      and fieldnames as given
+
+    create table $templateName(
+		id int primary key,
+		foreach(){
+			$fieldname $fieldtype ,
+		}
+	)
+
+   #1 Make sure the filenames are not same
+   #1 Make sure the files have php extension
+
+2. Create View
+   ===========
+
+   New View Form
+   -------------
+   1. Select a template
+   2. Get view fields from the table name
+   3. Show views as checkboxes

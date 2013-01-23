@@ -11,7 +11,6 @@ class Test extends CI_Controller {
 
 	public function index(){
 		# code...
-		
 	}
 
 	public function createUser(){
@@ -32,6 +31,26 @@ class Test extends CI_Controller {
 			echo "Login Success";
 		else
 			echo "Failed";
+	}
+
+	public function addTemplate(){
+		# code...
+		if(!$post = $this->input->post())
+			$this->load->view('addTemplate');
+
+		else{
+			$this->load->library('mylibrary');
+			echo "<pre>";
+
+
+			$data = $this->mylibrary->uploader(1, 'templateView');
+			print_r($data);
+			$data = $this->mylibrary->uploader(1, 'cmsView');
+			print_r($data);
+
+			print_r($post);
+		}
+
 	}
 
 }

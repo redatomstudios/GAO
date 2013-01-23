@@ -21,4 +21,10 @@ class TestModel extends CI_Model{
 			return true;
 		return false;
 	}
+
+	public function createTemplate($templateName){
+		# code...
+		$this->db->insert('templates', array('name' => $templateName));
+
+	}
 }

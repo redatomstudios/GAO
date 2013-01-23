@@ -22,9 +22,16 @@ class TestModel extends CI_Model{
 		return false;
 	}
 
-	public function createTemplate($templateName){
+	public function createTemplate($data, $fields){
 		# code...
-		$this->db->insert('templates', array('name' => $templateName));
+		// $this->db->insert('templates', $data);
+		$query = 'CREATE TABLE '. $data['templateName'] . '( id int(11) primary key, ';
+		foreach ($fields as $field) {
+			$query .= $field['fieldName'] . ' ' . $field['fieldType'] .', ';
+		}
+		$query = substr($query, 0, strlen($query)-2);
 
+		$query .= ')';
+		echo $query;
 	}
 }

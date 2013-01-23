@@ -6,8 +6,8 @@
 .sidebar > nav {
 	width: 234px;
 	background: #EAF9FD;
-	padding: 180px 13px 20px;
-	box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.5);
+	padding: 140px 13px 20px;
+	box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
 }
 
 .sidebar > nav li {
@@ -29,5 +29,5 @@
 	padding: 13px;
 	margin: 20px 0;
 	background: #EAF9FD;
-	box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.5);
+	box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
 }

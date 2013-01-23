@@ -1,0 +1,9 @@
+#pageContent {
+	width: 755px;
+	float: left;
+	margin: 0 10px;
+}
+
+#pageContent p {
+	margin: 20px 10px;
+}

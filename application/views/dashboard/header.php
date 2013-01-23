@@ -7,11 +7,3 @@
 </head>
 <body>
 	<div id="bodyWrap">
-		<header>
-		<img src="<?= base_url() ?>resources/branding/headerLogo.png" id="headerLogo" />
-		<ul id="headerNav">
-			<li>User Name</li>
-			<li><a href="">Your Fundraiser</a></li>
-			<li><a href="">Logout</a></li>
-		</ul>
-		</header>

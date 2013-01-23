@@ -1,19 +1,20 @@
 .sidebar {
 	float: left;
+	position: fixed;
 	width: 260px;
+	height: 100%;
+	background: url('images/whiteNoise.jpg') #FFF;
+	box-shadow: 2px 3px 7px rgba(0, 0, 0, 0.5);
+	overflow: auto;
 }
 
 .sidebar > nav {
-	width: 234px;
-	background: #EAF9FD;
-	padding: 140px 13px 20px;
-	box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
+	padding: 30px 0 20px;
 }
 
 .sidebar > nav li {
 	line-height: 2em;
-	padding: 0 10px;
-	border-top: solid thin rgba(0, 0, 0, 0.1);
+	padding: 0 30px;
 }
 
 .sidebar > nav li:first-child {
@@ -22,12 +23,13 @@
 
 .sidebar > nav li.current {
 	font-weight: bold;
+	background: rgba(0, 0, 0, 0.3);
 }
 
-.sidebar .sideModule {
-	width: 234px;
-	padding: 13px;
-	margin: 20px 0;
-	background: #EAF9FD;
-	box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
+.sidebar > nav li.current > a {
+	color: #FFF;
+}
+
+.sidebar > nav a {
+	display: block;
 }

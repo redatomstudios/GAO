@@ -1,6 +1,6 @@
 		<div id="pageContent">
 			<h1>Templates</h1>
-			<table>
+			<table class="sortable listing">
 				<thead>
 					<tr>
 						<th>Action</th>
@@ -11,22 +11,31 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td class="centered">
+							<input type="checkbox" />Delete, 
+							Edit
+						</td>
+						<td>Flow</td>
+						<td>12/12/2013</td>
+						<td>Home, About Us</td>
 					</tr>
 					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td class="centered">
+							<input type="checkbox" />Delete, 
+							Edit
+						</td>
+						<td>Flow</td>
+						<td>12/12/2013</td>
+						<td>Home, About Us</td>
 					</tr>
 					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td class="centered">
+							<input type="checkbox" />Delete, 
+							Edit
+						</td>
+						<td>Flow</td>
+						<td>12/12/2013</td>
+						<td>Home, About Us</td>
 					</tr>
 				</tbody>
 			</table>

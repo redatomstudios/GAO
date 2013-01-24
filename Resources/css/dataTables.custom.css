@@ -3,11 +3,14 @@ table, table.dataTable {
 	margin: 30px 0;
 }
 
-table th {
+table.dataTable th, table th {
 	font-weight: bold;
+	line-height: 1.3em;
+	padding: 10px;
+	vertical-align: middle;
 }
 
-table td {
+table.dataTable td, table td {
 	line-height: 1.3em;
 	padding: 10px;
 	vertical-align: middle;

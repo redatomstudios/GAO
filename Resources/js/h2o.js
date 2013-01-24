@@ -12,6 +12,8 @@ jQuery(document).ready(function() {
 	 *
 	 */
 	$('table').each(function() {
-		$(this).dataTable();
+		$(this).dataTable({
+			"aaSorting": [[]]
+		});
 	});
 });

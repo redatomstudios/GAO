@@ -1,5 +1,19 @@
-table.dataTable td {
+table, table.dataTable {
+	width: 100%;
+	margin: 30px 0;
+}
+
+table th {
+	font-weight: bold;
+}
+
+table td {
 	line-height: 1.3em;
 	padding: 10px;
 	vertical-align: middle;
 }
+
+table.centerCells td, table.centerCells th {
+	text-align: center;
+}
+

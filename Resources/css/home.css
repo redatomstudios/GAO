@@ -1,8 +1,10 @@
 #pageContent {
-	width: 755px;
+	/*width: 755px;*/
+	width: 100%;
 	float: left;
-	margin: 10px;
+	margin: 30px;
 	padding-left: 260px;
+	box-sizing: border-box;
 }
 
 #pageContent p {

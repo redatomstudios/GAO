@@ -39,4 +39,7 @@
 					</tr>
 				</tbody>
 			</table>
+			<p>
+				<a href="<?= base_url() ?>dash/templates/new"><button type="button">New Template</button></a>
+			</p>
 		</div>

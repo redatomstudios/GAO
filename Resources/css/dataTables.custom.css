@@ -20,3 +20,10 @@ table.centerCells td, table.centerCells th {
 	text-align: center;
 }
 
+table.dataTable tr.even {
+	background: #F3F5FF;
+}
+
+table.dataTable tr.odd {
+	background: #E9EAFA;
+}

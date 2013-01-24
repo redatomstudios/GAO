@@ -1,7 +1,7 @@
 		<div id="pageContent">
 			<h1>Templates</h1>
 			<?= form_open() ?>
-			<table class="sortable listing">
+			<table class="sortable listing centerCells">
 				<thead>
 					<tr>
 						<th>Action</th>
@@ -12,7 +12,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td class="centered">
+						<td>
 							<input type="checkbox" />Delete, 
 							Edit
 						</td>
@@ -21,7 +21,7 @@
 						<td>Home, About Us</td>
 					</tr>
 					<tr>
-						<td class="centered">
+						<td>
 							<input type="checkbox" />Delete, 
 							Edit
 						</td>
@@ -30,7 +30,7 @@
 						<td>Home, About Us</td>
 					</tr>
 					<tr>
-						<td class="centered">
+						<td>
 							<input type="checkbox" />Delete, 
 							Edit
 						</td>

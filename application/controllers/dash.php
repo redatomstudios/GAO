@@ -49,9 +49,9 @@ class Dash extends CI_Controller {
 		} else {
 			// Since the view for each template is different, set $activeView to the 
 			// CMS View corresponding to the template used by the selected page.
-			$activeView = 'dashboard/pages/editTemplate';
+			$activeView = 'dashboard/pages/editTemplate'; // <-- I'm just loading this temporarily :o
 			if($pageID == 'new') {
-				// This is new page, load the empty CMS view
+				// This is a new page, load the empty CMS view
 				$data['pageHeading'] = 'New Page';
 			} else {
 				// This is a pre-existing page that's being edited, load values from DB 

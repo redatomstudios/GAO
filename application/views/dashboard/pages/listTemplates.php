@@ -1,5 +1,6 @@
 		<div id="pageContent">
 			<h1>Templates</h1>
+			<?= form_open() ?>
 			<table class="sortable listing">
 				<thead>
 					<tr>
@@ -40,6 +41,7 @@
 				</tbody>
 			</table>
 			<p>
-				<a href="<?= base_url() ?>dash/templates/new"><button type="button">New Template</button></a>
+				<a href="<?= base_url() ?>dash/templates/new"><button type="button">New Template</button></a> <button type="submit">Delete Selected</button>
 			</p>
+			<?= form_close() ?>
 		</div>

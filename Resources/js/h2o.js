@@ -12,7 +12,7 @@ jQuery(document).ready(function() {
 	 *							| This assumes that the data is ALREADY sorted by the server, and so	|
 	 *							| disables initial sorting to prevent tampering.											|
 	 *	---------------------------------------------------------------------------------------------------
-	 * 	Filtered		|	If not present, searching is disabled																|	bFilter
+	 * 	filtered		|	If not present, searching is disabled																|	bFilter
 	 *
 	 * The configuration variables are stored in a configString Object. Yes, I know, it's not a string
 	 * it's an object. But...it's named that for 'Historical' (lol) reasons. Anyway, the idea is to 
@@ -22,11 +22,10 @@ jQuery(document).ready(function() {
 	$('table').each(function() {
 		var configString = {};
 
-		if($(this).hasClass('sorted')) {
-			configString['bSort'] = [[]];
-		}
-
-		configString['bFilter'] = $(this).hasClass("filtered");
+		configString['bSort']			= ( $(this).hasClass("sorted") ? [[]] : '' );
+		configString['bFilter'] 	= $(this).hasClass("filtered");
+		configString['bInfo'] 		= $(this).hasClass("info");
+		configString['bPaginate']	= $(this).hasClass("paginate");
 
 		$(this).dataTable(configString);
 	});

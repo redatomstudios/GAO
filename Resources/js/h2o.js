@@ -9,9 +9,11 @@ jQuery(document).ready(function() {
 	 *	=====================================================================================================
 	 *	| Class				|	Attribute																														|	Parameter Name|
 	 *	=====================================================================================================
-	 *  | sorted			|	Controls sorting, if present, the data will NOT be sorted						|	bSortable			|
+	 *  | sorted			|	Controls sorting, if present, the data will NOT be sorted						|	aaSorting			|
 	 *	|							| This assumes that the data is ALREADY sorted by the server, and so	|								|
-	 *	|							| disables initial sorting to prevent tampering.											|								|
+	 *	|							| disables INITIAL sorting to prevent tampering.											|								|
+	 *	-----------------------------------------------------------------------------------------------------
+	 *	| sortable		| Determines if the user can sort the columns													|	bSort					|
 	 *	-----------------------------------------------------------------------------------------------------
 	 * 	| filtered		|	If not present, searching is disabled																|	bFilter				|
 	 *	-----------------------------------------------------------------------------------------------------
@@ -25,11 +27,12 @@ jQuery(document).ready(function() {
 	 * populate the configString with the appropriate values based on the classes assigned to the table
 	 * and then initialize dataTables with the object.
 	 ******************************************************************************************************/
-	 
+
 	$('table').each(function() {
 		var configString = {};
 
-		configString['bSort']			= ( $(this).hasClass("sorted") ? [[]] : '' );
+		configString['aaSorting']	= ( $(this).hasClass("sorted") ? [] : '' );
+		configString['bSort']			= $(this).hasClass("sortable");
 		configString['bFilter'] 	= $(this).hasClass("filtered");
 		configString['bInfo'] 		= $(this).hasClass("info");
 		configString['bPaginate']	= $(this).hasClass("paginate");

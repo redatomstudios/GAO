@@ -27,8 +27,8 @@
 				</tbody>
 			</table>
 			<p>
-				<a href="<?= base_url() ?>dash/templates/new"><button type="button">New Template</button></a> 
-				<button type="submit">Delete Selected</button>
+				<input type="submit" value="Delete Selected" /> or
+				<a href="<?= base_url() ?>dash/templates/new"><input type="button" value="Add New Template" /></a> 
 			</p>
 			<?= form_close() ?>
 		</div>

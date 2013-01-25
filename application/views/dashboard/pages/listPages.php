@@ -27,7 +27,16 @@
 				</tbody>
 			</table>
 			<p>
-				<a href="<?= base_url() ?>dash/templates/new"><button type="button">New Page</button></a> <button type="submit">Delete Selected</button>
+				<input type="submit" name="deletePages" value="Delete Selected" /> or 
+				<select name="pageTemplate">
+					<option selected="selected">Select a template</option>
+					<option>Template 1</option>
+					<option>Template 2</option>
+					<option>Template 3</option>
+					<option>Template 4</option>
+				</select> and
+				<input type="button" name="newPage" value="Create New Page" /> with template.
+
 			</p>
 			<?= form_close() ?>
 		</div>

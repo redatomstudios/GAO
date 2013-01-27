@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2
+-- version 3.5.2.2
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Jan 25, 2013 at 06:56 AM
--- Server version: 5.5.25a
--- PHP Version: 5.4.4
+-- Host: 127.0.0.1
+-- Generation Time: Jan 27, 2013 at 04:10 PM
+-- Server version: 5.5.27
+-- PHP Version: 5.4.7
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `gao`
 --
+CREATE DATABASE `gao` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `gao`;
 
 -- --------------------------------------------------------
 
@@ -40,34 +42,26 @@ CREATE TABLE IF NOT EXISTS `fundcontrol` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pages`
---
-
-DROP TABLE IF EXISTS `pages`;
-CREATE TABLE IF NOT EXISTS `pages` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(50) NOT NULL,
-  `templateTableName` varchar(50) NOT NULL,
-  `templateId` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `templates`
 --
 
 DROP TABLE IF EXISTS `templates`;
 CREATE TABLE IF NOT EXISTS `templates` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
+  `templateName` varchar(50) NOT NULL,
   `userView` text NOT NULL,
   `cmsView` text NOT NULL,
   `tableName` varchar(50) NOT NULL,
-  `dateAdded` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `TimeStamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `templates`
+--
+
+INSERT INTO `templates` (`id`, `templateName`, `userView`, `cmsView`, `tableName`, `TimeStamp`) VALUES
+(1, 'Test_Template', 'File4.txt', 'GAO4.txt', '', '2013-01-27 06:19:32');
 
 -- --------------------------------------------------------
 

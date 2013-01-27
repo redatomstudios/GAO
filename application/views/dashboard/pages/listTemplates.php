@@ -11,13 +11,13 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php for($i = 0; $i < 5; $i++) { ?>
-					<?php // foreach($templates as $thisTemplate) { ?>
+					<?php // for($i = 0; $i < 5; $i++) { ?>
+					<?php  foreach($templates as $thisTemplate) { ?>
 					<tr>
 						<td>
-							<input type="checkbox" name="templateDeletions[]" value="<?= $templateID ?>" /> 
-							<a href="<?= base_url() ?>dash/deleteTemplate/<?= $templateID ?>" >Delete</a>, 
-							<a href="<?= base_url() ?>dash/templates/<?= $templateID ?>" >Edit</a>
+							<input type="checkbox" name="templateDeletions[]" value="<?= $thisTemplate['templateName'] ?>" /> 
+							<a href="<?= base_url() ?>dash/deleteTemplate/<?= $thisTemplate['id'] ?>" >Delete</a>, 
+							<a href="<?= base_url() ?>dash/templates/<?= $thisTemplate['id'] ?>" >Edit</a>
 						</td>
 						<td>Home</td>
 						<td>12/12/2013</td>

@@ -18,25 +18,57 @@ class Dash extends CI_Controller {
 	}
 
 	public function templates($templateID = 0) {
-		$data['thisPage'] = 'templates';
+		$this->load->model('templatesModel');
+
+
+		// $data['thisPage'] = 'templates';
 
 		$activeView = '';
 		if(!$templateID) {
+			$data['templates'] = $this->templatesModel->getTemplates();
 			$activeView = 'dashboard/pages/listTemplates';
 		} else {
 			$activeView = 'dashboard/pages/editTemplate';
 			if($templateID == 'new') {
-				// This is new template, don't load anything from DB
-				$data['pageHeading'] = 'New Template';
+				if(!$post = $this->input->post()){
+					$data['pageHeading'] = 'New Template';
+					$this->load->view('dashboard/header');
+					$this->load->view('dashboard/sidebar', $data);
+					$this->load->view($activeView, $data);
+					$this->load->view('dashboard/footer');
+				}
+				else{
+
+					$this->load->library('mylibrary');
+					$this->load->model('templatesModel');
+
+					$templateName = preg_replace('/[^a-zA-Z0-9]/', '_', $post['templateName']);
+					$d = $this->mylibrary->uploader($templateName, 'publicView');
+					$data['userView'] = $d['filename'];
+					$d = $this->mylibrary->uploader($templateName, 'cmsView');
+					$data['cmsView'] = $d['filename'];
+					$data['templateName'] = $templateName;
+					$fields = array();
+					// print_r($post);
+					for($i=0; $i<sizeof($post['fieldName']);$i++){
+						$fields[$i] = array(
+							'fieldName' => $post['fieldName'][$i],
+							'fieldType' => $post['fieldType'][$i],
+							'fieldLength' => $post['fieldLength'][$i],
+							'fieldDefault' => $post['fieldDefault'][$i]);
+					}
+					$this->templatesModel->createTemplate($data, $fields);
+					// This is new template, don't load anything from DB
+				}
 			} else {
 				// This is an old template that's being edited, load from DB 
 			}
 		}
 
-		$this->load->view('dashboard/header');
-		$this->load->view('dashboard/sidebar', $data);
-		$this->load->view($activeView, $data);
-		$this->load->view('dashboard/footer');
+		// $this->load->view('dashboard/header');
+		// $this->load->view('dashboard/sidebar', $data);
+		// $this->load->view($activeView, $data);
+		// $this->load->view('dashboard/footer');
 	}
 
 	public function pages($pageID = 0) {

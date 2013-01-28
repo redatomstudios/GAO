@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 27, 2013 at 04:10 PM
+-- Generation Time: Jan 28, 2013 at 06:58 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -19,6 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `gao`
 --
+DROP DATABASE `gao`;
 CREATE DATABASE `gao` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `gao`;
 
@@ -52,16 +53,17 @@ CREATE TABLE IF NOT EXISTS `templates` (
   `userView` text NOT NULL,
   `cmsView` text NOT NULL,
   `tableName` varchar(50) NOT NULL,
-  `TimeStamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `tableName` (`tableName`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `templates`
 --
 
-INSERT INTO `templates` (`id`, `templateName`, `userView`, `cmsView`, `tableName`, `TimeStamp`) VALUES
-(1, 'Test_Template', 'File4.txt', 'GAO4.txt', '', '2013-01-27 06:19:32');
+INSERT INTO `templates` (`id`, `templateName`, `userView`, `cmsView`, `tableName`, `timestamp`) VALUES
+(4, 'test template', 'libglesv22.dll', 'npchrome_frame.dll', 'test_template', '2013-01-28 17:53:47');
 
 -- --------------------------------------------------------
 

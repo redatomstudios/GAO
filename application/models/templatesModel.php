@@ -19,7 +19,7 @@ class TemplatesModel extends CI_Model{
 			$query = 'CREATE TABLE '. $data['templateName'] . '( id int(11) primary key, ';
 			foreach ($fields as $field) {
 				$query .= $field['fieldName'] . ' ' . $field['fieldType'] ;
-				$query .= ($field['fieldLength']!=''?'('.$field['fieldLength'].'), ':'');
+				$query .= ($field['fieldLength']!=''?'('.$field['fieldLength'].'), ':'(10), ');
 				if($field['fieldDefault']!=''){
 					$query = substr($query, 0, strlen($query)-2);
 					$query .= ' default \'' . $field['fieldDefault'].'\', ';

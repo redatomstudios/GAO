@@ -1,6 +1,6 @@
 		<div id="pageContent">
 			<h1>Templates</h1>
-			<?= form_open() ?>
+			<?= form_open('/dash/templates/delete') ?>
 			<table class="sortable listing centerCells">
 				<thead>
 					<tr>
@@ -15,12 +15,12 @@
 					<?php  foreach($templates as $thisTemplate) { ?>
 					<tr>
 						<td>
-							<input type="checkbox" name="templateDeletions[]" value="<?= $thisTemplate['templateName'] ?>" /> 
+							<input type="checkbox" name="templateDeletions[]" value="<?= $thisTemplate['id'] ?>" /> 
 							<a href="<?= base_url() ?>dash/deleteTemplate/<?= $thisTemplate['id'] ?>" >Delete</a>, 
 							<a href="<?= base_url() ?>dash/templates/<?= $thisTemplate['id'] ?>" >Edit</a>
 						</td>
-						<td>Home</td>
-						<td>12/12/2013</td>
+						<td><?= $thisTemplate['templateName'] ?></td>
+						<td><?= $thisTemplate['timestamp'] ?></td>
 						<td>Home, About Us</td>
 					</tr>
 					<?php } ?>

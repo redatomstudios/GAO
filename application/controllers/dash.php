@@ -20,24 +20,29 @@ class Dash extends CI_Controller {
 	public function templates($templateID = 0) {
 		$this->load->model('templatesModel');
 
-
-		// $data['thisPage'] = 'templates';
+		$view = 1;
+		$data = array();
+		$data1['thisPage'] = 'templates';
 
 		$activeView = '';
 		if(!$templateID) {
-			$data['templates'] = $this->templatesModel->getTemplates();
+			$templates = $this->templatesModel->getTemplates();
+			$data['templates'] = (!($templates)?array():$templates);
 			$activeView = 'dashboard/pages/listTemplates';
 		} else {
+
+
 			$activeView = 'dashboard/pages/editTemplate';
 			if($templateID == 'new') {
+
 				if(!$post = $this->input->post()){
-					$data['pageHeading'] = 'New Template';
-					$this->load->view('dashboard/header');
-					$this->load->view('dashboard/sidebar', $data);
-					$this->load->view($activeView, $data);
-					$this->load->view('dashboard/footer');
+					$data1['pageHeading'] = 'New Template';
+					
 				}
 				else{
+					$view = 0;
+
+					echo "<pre>";
 
 					$this->load->library('mylibrary');
 					$this->load->model('templatesModel');
@@ -47,7 +52,8 @@ class Dash extends CI_Controller {
 					$data['userView'] = $d['filename'];
 					$d = $this->mylibrary->uploader($templateName, 'cmsView');
 					$data['cmsView'] = $d['filename'];
-					$data['templateName'] = $templateName;
+					$data['templateName'] = $post['templateName'];
+					$data['tableName'] = $templateName;
 					$fields = array();
 					// print_r($post);
 					for($i=0; $i<sizeof($post['fieldName']);$i++){
@@ -57,18 +63,29 @@ class Dash extends CI_Controller {
 							'fieldLength' => $post['fieldLength'][$i],
 							'fieldDefault' => $post['fieldDefault'][$i]);
 					}
+
+					print_r($data);
 					$this->templatesModel->createTemplate($data, $fields);
+					redirect('/dash/templates');
 					// This is new template, don't load anything from DB
+				}
+			}elseif($templateID == 'delete'){
+				$view = 0;
+				echo "<pre>";
+
+				if($post = $this->input->post()){
+					print_r($post);
 				}
 			} else {
 				// This is an old template that's being edited, load from DB 
 			}
 		}
-
-		// $this->load->view('dashboard/header');
-		// $this->load->view('dashboard/sidebar', $data);
-		// $this->load->view($activeView, $data);
-		// $this->load->view('dashboard/footer');
+		if($view){
+			$this->load->view('dashboard/header');
+			$this->load->view('dashboard/sidebar', $data1);
+			$this->load->view($activeView, $data);
+			$this->load->view('dashboard/footer');
+		}
 	}
 
 	public function pages($pageID = 0) {

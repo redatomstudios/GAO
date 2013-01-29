@@ -22,8 +22,8 @@ jQuery(document).ready(function() {
 	 *	| paginate		|	If not present, pagination is disabled															|	bPaginate			|
 	 *	-----------------------------------------------------------------------------------------------------
 	 *
-	 * The configuration variables are stored in a configString Object. Yes, I know, it's not a string
-	 * it's an object. But...it's named that for 'Historical' (lol) reasons. Anyway, the idea is to 
+	 * The configuration variables are stored in a configString Object. Yes, I know, it's not a string;
+	 * it's an object. But...it's named that for 'historical' (lol) reasons. Anyway, the idea is to 
 	 * populate the configString with the appropriate values based on the classes assigned to the table
 	 * and then initialize dataTables with the object.
 	 ******************************************************************************************************/

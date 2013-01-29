@@ -1,3 +1,4 @@
+	<div id="bodyWrap">
 		<div id="pageContent">
 			<h1>Pages</h1>
 			<?= form_open() ?>
@@ -40,3 +41,4 @@
 			</p>
 			<?= form_close() ?>
 		</div>
+	</div>

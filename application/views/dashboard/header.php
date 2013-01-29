@@ -6,4 +6,3 @@
 	<script src="<?= base_url() ?>resources/scripts.php" ></script>
 </head>
 <body>
-	<div id="bodyWrap">

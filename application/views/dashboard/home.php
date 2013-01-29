@@ -1,6 +1,6 @@
 		<div id="pageContent">
 			<h1>Dashboard</h1>
 			<p>
-				Uh...we need to decide on the content that goes here :P
+				Okay, we put basic analytics here: Page views, total collected, total number of fundraisers etc.
 			</p>
 		</div>

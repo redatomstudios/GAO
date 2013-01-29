@@ -1,3 +1,4 @@
+	<div id="bodyWrap">
 		<div id="pageContent">
 			<h1><?= isset($pageHeading) ? $pageHeading : "Edit Template" ?></h1>
 			<?= form_open() ?>
@@ -209,3 +210,4 @@
 				$('table#fieldList').append('<tr>' + $(rowContent).html() + '</tr>');
 			});
 		</script>
+	</div>

@@ -42,7 +42,7 @@ class Dash extends CI_Controller {
 				else{
 					$view = 0;
 
-					echo "<pre>";
+					// echo "<pre>";
 
 					$this->load->library('mylibrary');
 					$this->load->model('templatesModel');
@@ -57,14 +57,17 @@ class Dash extends CI_Controller {
 					$fields = array();
 					// print_r($post);
 					for($i=0; $i<sizeof($post['fieldName']);$i++){
-						$fields[$i] = array(
-							'fieldName' => $post['fieldName'][$i],
-							'fieldType' => $post['fieldType'][$i],
-							'fieldLength' => $post['fieldLength'][$i],
-							'fieldDefault' => $post['fieldDefault'][$i]);
+						if($post['fieldName'][$i] != '')
+							$fields[$i] = array(
+								'fieldName' => $post['fieldName'][$i],
+								'fieldType' => $post['fieldType'][$i],
+								'fieldLength' => $post['fieldLength'][$i],
+								'fieldDefault' => $post['fieldDefault'][$i]);
+						else
+							break;
 					}
 
-					print_r($data);
+					// print_r($data);
 					$this->templatesModel->createTemplate($data, $fields);
 					redirect('/dash/templates');
 					// This is new template, don't load anything from DB
@@ -72,10 +75,21 @@ class Dash extends CI_Controller {
 			}elseif($templateID == 'delete'){
 				$view = 0;
 				echo "<pre>";
-
+				$this->load->library('mylibrary');
 				if($post = $this->input->post()){
-					print_r($post);
+					// print_r($post['templateDeletions']);
+					foreach ($post['templateDeletions'] as $templateId) {
+						# code...
+						$t = $this->templatesModel->getTemplate($templateId);
+						$templateIds[] = $t['id'];
+						$templateTables[] = $t['tableName'];
+						$this->templatesModel->deleteTemplate($t['id'], $t['tableName']);
+						$this->mylibrary->deleteDirectory($_SERVER['DOCUMENT_ROOT'] . base_url(). 'application/views/templates/' . $t['tableName']);
+					}
 				}
+				redirect('/dash/templates');
+
+				
 			} else {
 				// This is an old template that's being edited, load from DB 
 			}

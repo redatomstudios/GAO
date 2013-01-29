@@ -12,11 +12,17 @@ class TemplatesModel extends CI_Model{
 		return FALSE;
 	}
 
+	public function getTemplate($id){
+		# code...
+		$res = $this->db->get_where('templates', array('id' => $id));
+		return $res->row_array();
+	}
+
 	public function createTemplate($data, $fields){
 		# code...
 		if($this->db->insert('templates', $data)){
 
-			$query = 'CREATE TABLE '. $data['templateName'] . '( id int(11) primary key, ';
+			$query = 'CREATE TABLE '. $data['tableName'] . '( id int(11) primary key, ';
 			foreach ($fields as $field) {
 				$query .= $field['fieldName'] . ' ' . $field['fieldType'] ;
 				$query .= ($field['fieldLength']!=''?'('.$field['fieldLength'].'), ':'(10), ');
@@ -25,14 +31,26 @@ class TemplatesModel extends CI_Model{
 					$query .= ' default \'' . $field['fieldDefault'].'\', ';
 				}
 			}
-			echo $query;
+			// echo $query;
 			$query = substr($query, 0, strlen($query)-2);
 
 			$query .= ')';
-			echo "</br>".$query;
+			// echo "</br>".$query;
 		}
 
-		// $this->db->query($query);
+		$this->db->query($query);
+	}
+
+	public function deleteTemplate($templateId, $templateTableName){
+		# code...
+		echo "</br>" . $templateId . "   " . $templateTableName . "Removing" ;
+		$this->db->where('id', $templateId);
+		$this->db->delete('templates'); 
+
+		$this->db->query("drop table $templateTableName");
+
+		
+		
 	}
 
 }

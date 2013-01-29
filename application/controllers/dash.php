@@ -18,25 +18,88 @@ class Dash extends CI_Controller {
 	}
 
 	public function templates($templateID = 0) {
-		$data['thisPage'] = 'templates';
+		$this->load->model('templatesModel');
+
+		$view = 1;
+		$data = array();
+		$data1['thisPage'] = 'templates';
 
 		$activeView = '';
 		if(!$templateID) {
+			$templates = $this->templatesModel->getTemplates();
+			$data['templates'] = (!($templates)?array():$templates);
 			$activeView = 'dashboard/pages/listTemplates';
 		} else {
+
+
 			$activeView = 'dashboard/pages/editTemplate';
 			if($templateID == 'new') {
-				// This is new template, don't load anything from DB
-				$data['pageHeading'] = 'New Template';
+
+				if(!$post = $this->input->post()){
+					$data1['pageHeading'] = 'New Template';
+					
+				}
+				else{
+					$view = 0;
+
+					// echo "<pre>";
+
+					$this->load->library('mylibrary');
+					$this->load->model('templatesModel');
+
+					$templateName = preg_replace('/[^a-zA-Z0-9]/', '_', $post['templateName']);
+					$d = $this->mylibrary->uploader($templateName, 'publicView');
+					$data['userView'] = $d['filename'];
+					$d = $this->mylibrary->uploader($templateName, 'cmsView');
+					$data['cmsView'] = $d['filename'];
+					$data['templateName'] = $post['templateName'];
+					$data['tableName'] = $templateName;
+					$fields = array();
+					// print_r($post);
+					for($i=0; $i<sizeof($post['fieldName']);$i++){
+						if($post['fieldName'][$i] != '')
+							$fields[$i] = array(
+								'fieldName' => $post['fieldName'][$i],
+								'fieldType' => $post['fieldType'][$i],
+								'fieldLength' => $post['fieldLength'][$i],
+								'fieldDefault' => $post['fieldDefault'][$i]);
+						else
+							break;
+					}
+
+					// print_r($data);
+					$this->templatesModel->createTemplate($data, $fields);
+					redirect('/dash/templates');
+					// This is new template, don't load anything from DB
+				}
+			}elseif($templateID == 'delete'){
+				$view = 0;
+				echo "<pre>";
+				$this->load->library('mylibrary');
+				if($post = $this->input->post()){
+					// print_r($post['templateDeletions']);
+					foreach ($post['templateDeletions'] as $templateId) {
+						# code...
+						$t = $this->templatesModel->getTemplate($templateId);
+						$templateIds[] = $t['id'];
+						$templateTables[] = $t['tableName'];
+						$this->templatesModel->deleteTemplate($t['id'], $t['tableName']);
+						$this->mylibrary->deleteDirectory($_SERVER['DOCUMENT_ROOT'] . base_url(). 'application/views/templates/' . $t['tableName']);
+					}
+				}
+				redirect('/dash/templates');
+
+				
 			} else {
 				// This is an old template that's being edited, load from DB 
 			}
 		}
-
-		$this->load->view('dashboard/header');
-		$this->load->view('dashboard/sidebar', $data);
-		$this->load->view($activeView, $data);
-		$this->load->view('dashboard/footer');
+		if($view){
+			$this->load->view('dashboard/header');
+			$this->load->view('dashboard/sidebar', $data1);
+			$this->load->view($activeView, $data);
+			$this->load->view('dashboard/footer');
+		}
 	}
 
 	public function pages($pageID = 0) {

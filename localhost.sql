@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2
+-- version 3.5.2.2
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Jan 25, 2013 at 06:56 AM
--- Server version: 5.5.25a
--- PHP Version: 5.4.4
+-- Host: 127.0.0.1
+-- Generation Time: Jan 28, 2013 at 06:58 PM
+-- Server version: 5.5.27
+-- PHP Version: 5.4.7
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,6 +19,9 @@ SET time_zone = "+00:00";
 --
 -- Database: `gao`
 --
+DROP DATABASE `gao`;
+CREATE DATABASE `gao` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `gao`;
 
 -- --------------------------------------------------------
 
@@ -40,34 +43,27 @@ CREATE TABLE IF NOT EXISTS `fundcontrol` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pages`
---
-
-DROP TABLE IF EXISTS `pages`;
-CREATE TABLE IF NOT EXISTS `pages` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(50) NOT NULL,
-  `templateTableName` varchar(50) NOT NULL,
-  `templateId` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `templates`
 --
 
 DROP TABLE IF EXISTS `templates`;
 CREATE TABLE IF NOT EXISTS `templates` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
+  `templateName` varchar(50) NOT NULL,
   `userView` text NOT NULL,
   `cmsView` text NOT NULL,
   `tableName` varchar(50) NOT NULL,
-  `dateAdded` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `tableName` (`tableName`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `templates`
+--
+
+INSERT INTO `templates` (`id`, `templateName`, `userView`, `cmsView`, `tableName`, `timestamp`) VALUES
+(4, 'test template', 'libglesv22.dll', 'npchrome_frame.dll', 'test_template', '2013-01-28 17:53:47');
 
 -- --------------------------------------------------------
 

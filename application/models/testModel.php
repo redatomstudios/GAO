@@ -24,7 +24,7 @@ class TestModel extends CI_Model{
 
 	public function createTemplate($data, $fields){
 		# code...
-		// $this->db->insert('templates', $data);
+		$this->db->insert('templates', $data);
 		$query = 'CREATE TABLE '. $data['templateName'] . '( id int(11) primary key, ';
 		foreach ($fields as $field) {
 			$query .= $field['fieldName'] . ' ' . $field['fieldType'] .', ';

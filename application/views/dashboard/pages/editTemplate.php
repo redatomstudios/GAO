@@ -1,7 +1,7 @@
 	<div id="bodyWrap">
 		<div id="pageContent">
 			<h1><?= isset($pageHeading) ? $pageHeading : "Edit Template" ?></h1>
-			<?= form_open() ?>
+			<?= form_open_multipart() ?>
 			<table class="sortable listing">
 				<tbody>
 					<tr>

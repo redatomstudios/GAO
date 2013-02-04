@@ -22,7 +22,10 @@ class TemplatesModel extends CI_Model{
 	public function getTemplate($id){
 		# code...
 		$res = $this->db->get_where('templates', array('id' => $id));
-		return $res->row_array();
+		$template = $res->row_array();
+		$res = $this->db->query('SHOW COLUMNS FROM ' . $template['tableName']);
+		$template['fields'] = $res->result_array();
+		return $template;
 	}
 
 	public function createTemplate($data, $fields){

@@ -68,6 +68,7 @@ class Dash extends CI_Controller {
 					$this->templatesModel->createTemplate($data, $fields);
 					redirect('/dash/templates');
 				}
+
 			}elseif($templateID == 'delete'){
 				$view = 0;
 				echo "<pre>";
@@ -85,9 +86,13 @@ class Dash extends CI_Controller {
 				}
 				redirect('/dash/templates');
 
-				
 			} else {
 				// This is an old template that's being edited, load from DB 
+				if(!$post = $this->input->post()){
+					$data = $this->templatesModel->getTemplate($templateID);
+				}
+				// echo "<pre>";
+				// print_r($data);
 			}
 		}
 		if($view){

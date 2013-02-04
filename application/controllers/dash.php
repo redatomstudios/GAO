@@ -27,7 +27,9 @@ class Dash extends CI_Controller {
 		$activeView = '';
 		if(!$templateID) {
 			$templates = $this->templatesModel->getTemplates();
-			$data['templates'] = (!($templates)?array():$templates);
+			$data['templates'] = $templates;
+			// echo "<pre>";
+			// print_r($data['templates']);
 			$activeView = 'dashboard/pages/listTemplates';
 		} else {
 
@@ -41,9 +43,6 @@ class Dash extends CI_Controller {
 				}
 				else{
 					$view = 0;
-
-					// echo "<pre>";
-
 					$this->load->library('mylibrary');
 					$this->load->model('templatesModel');
 
@@ -55,7 +54,6 @@ class Dash extends CI_Controller {
 					$data['templateName'] = $post['templateName'];
 					$data['tableName'] = $templateName;
 					$fields = array();
-					// print_r($post);
 					for($i=0; $i<sizeof($post['fieldName']);$i++){
 						if($post['fieldName'][$i] != '')
 							$fields[$i] = array(
@@ -67,10 +65,8 @@ class Dash extends CI_Controller {
 							break;
 					}
 
-					// print_r($data);
 					$this->templatesModel->createTemplate($data, $fields);
 					redirect('/dash/templates');
-					// This is new template, don't load anything from DB
 				}
 			}elseif($templateID == 'delete'){
 				$view = 0;

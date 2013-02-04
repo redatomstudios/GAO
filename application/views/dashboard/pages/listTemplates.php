@@ -22,7 +22,18 @@
 						</td>
 						<td><?= $thisTemplate['templateName'] ?></td>
 						<td><?= $thisTemplate['timestamp'] ?></td>
-						<td>Home, About Us</td>
+						<?php 
+						if(sizeof($thisTemplate['pageDetails']) == 0)
+							$pages = 'None';
+						else{
+							foreach ($thisTemplate['pageDetails'] as $page) {
+								# code...
+								$pages[] = $page['PageName'];
+							}
+							$pages = implode(',', $pages);
+						}
+						?>
+						<td><?= $pages ?></td>
 					</tr>
 					<?php } ?>
 				</tbody>

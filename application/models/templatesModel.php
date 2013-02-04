@@ -7,9 +7,16 @@ class TemplatesModel extends CI_Model{
 		# code...
 		$res = $this->db->get('templates');
 		if($res->num_rows() > 0){
-			return $res->result_array();
+			$templates = $res->result_array();
+			foreach ($templates as $template) {
+				# code...
+				$details = $this->db->get($template['tableName']);
+				$template['pageDetails'] = (($details->num_rows() > 0) ? $details->result_array() : array());
+				$t[] = $template;
+			}
+			return $t;
 		}
-		return FALSE;
+		return array();
 	}
 
 	public function getTemplate($id){
@@ -22,7 +29,7 @@ class TemplatesModel extends CI_Model{
 		# code...
 		if($this->db->insert('templates', $data)){
 
-			$query = 'CREATE TABLE '. $data['tableName'] . '( id int(11) primary key, ';
+			$query = 'CREATE TABLE '. $data['tableName'] . '( id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT, ';
 			foreach ($fields as $field) {
 				$query .= $field['fieldName'] . ' ' . $field['fieldType'] ;
 				$query .= ($field['fieldLength']!=''?'('.$field['fieldLength'].'), ':'(10), ');
@@ -48,9 +55,6 @@ class TemplatesModel extends CI_Model{
 		$this->db->delete('templates'); 
 
 		$this->db->query("drop table $templateTableName");
-
-		
-		
 	}
 
 }

@@ -10,3 +10,12 @@
 #pageContent p {
 	margin: 20px 10px;
 }
+
+#pageContent input[type="text"], #pageContent select, #pageContent textarea {
+	width: 100%;
+}
+
+#pageContent textarea {
+	min-height: 300px;
+	resize: none;
+}

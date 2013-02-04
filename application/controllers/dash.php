@@ -123,6 +123,16 @@ class Dash extends CI_Controller {
 		$this->load->view('dashboard/footer');
 	}
 
+	public function temp() {
+		$data['pageHeading'] = 'New Page';
+		$data['thisPage'] = 'pages';
+				
+		$this->load->view('dashboard/header');
+		$this->load->view('dashboard/sidebar', $data);
+		$this->load->view('view_cms');
+		$this->load->view('dashboard/footer');
+	}
+
 }
 
 ?>

@@ -4,7 +4,11 @@
 	<link rel="stylesheet" href="<?= base_url() ?>uploader/css/jquery.fileupload-ui.css">
 	<!-- CSS adjustments for browsers with JavaScript disabled -->
 	<noscript><link rel="stylesheet" href="<?= base_url() ?>uploader/css/jquery.fileupload-ui-noscript.css"></noscript>
+	<?php
 
+	$identifier = random_string('alnum', 16);
+
+	?>
 	<div id="bodyWrap">
 		<div id="pageContent">
 			<h1><?= isset($pageHeading) ? $pageHeading : "Edit Template" ?></h1>
@@ -296,6 +300,7 @@
 					<?php } } ?>
 				</tbody>
 			</table>
+			<input type="hidden" value="<?= $identifier ?>" />
 			<p style="display: none;">
 				<button type="submit">Save Template</button> <button type="button" id="addField">Add Field</button>
 			</p>
@@ -309,8 +314,7 @@
 					<tr>
 						<td>
 					    <form id="fileupload" class="fileupload" method="POST" enctype="multipart/form-data">
-					        <!-- Redirect browsers with JavaScript disabled to the origin page -->
-					        <noscript><input type="hidden" name="redirect" value="http://blueimp.github.com/jQuery-File-Upload/"></noscript>
+					    		<input type="hidden" value="<?= $identifier ?>" />
 					        <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
 					        <div class="row fileupload-buttonbar">
 					            <div class="span7">

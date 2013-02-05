@@ -174,7 +174,7 @@ class Dash extends CI_Controller {
 			$pages = array();
 			foreach ($templates as $template) {
 				# code...
-				$data1['templates'][] = $template['templateName'];
+				$data1['templates'][$template['id']] = $template['templateName'];
 				if($ps = $this->pagesModel->getPages($template['tableName'])){
 					$ps['template'] = $template['templateName'];
 					$pages = array_merge($pages, $ps);
@@ -200,6 +200,38 @@ class Dash extends CI_Controller {
 		$this->load->view('dashboard/sidebar', $data);
 		$this->load->view($activeView, $data1);
 		$this->load->view('dashboard/footer');
+	}
+
+	public function newPage(){
+		# code...
+
+		$this->load->model('templatesModel');
+
+
+		$templateId = $this->input->post('pageTemplate');
+		$template = $this->templatesModel->getTemplate($templateId);
+		$templateFolder = $template['tableName'];
+
+		$css = '';
+		$idDir = $_SERVER['DOCUMENT_ROOT'] . base_url(). 'Resources';
+		if($handle = opendir("$idDir/css/$templateFolder")){
+			while (false !== ($entry = readdir($handle))) {
+				if ($entry != "." && $entry != "..") {
+					// echo "</br>$entry";
+					$css .= '<link href="/GAO/resources/css/' . "$templateFolder/$entry" . '" rel="stylesheet">';
+				}
+			}
+		}
+		// echo "</br>";
+		$js = '';
+		if($handle = opendir("$idDir/js/$templateFolder")){
+			while (false !== ($entry = readdir($handle))) {
+				if ($entry != "." && $entry != "..") {
+					// echo "</br>$entry";
+					$js .= '<script src="/GAO/resources/js/' . "$templateFolder/$entry" . '"></script>';
+				}
+			}
+		}
 	}
 
 	public function temp() {

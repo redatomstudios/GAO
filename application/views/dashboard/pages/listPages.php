@@ -33,11 +33,11 @@
 
 				or
 
-				<?= form_open() ?>
+				<?= form_open('/dash/newPage') ?>
 				<select name="pageTemplate">
 					<option selected="selected">Select a template</option>
-					<?php foreach ($templates as $template) { ?>
-					<option><?= $template ?></option>
+					<?php foreach ($templates as $templateId => $template) { ?>
+					<option value="<?= $templateId ?>"><?= $template ?></option>
 					<?php } ?>
 				</select> and
 				<input type="submit" name="newPage" value="Create New Page" /> with template.

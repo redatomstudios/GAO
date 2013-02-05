@@ -302,7 +302,7 @@
 			</table>
 			<input type="hidden" name="identifier" value="<?= $identifier ?>" />
 			<p style="display: none;">
-				<button type="submit">Save Template</button> <button type="button" id="addField">Add Field</button>
+				<button type="submit">Save Template</button>
 			</p>
 			<?= form_close() ?>
 

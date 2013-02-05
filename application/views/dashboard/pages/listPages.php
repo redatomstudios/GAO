@@ -2,7 +2,7 @@
 		<div id="pageContent">
 			<h1>Pages</h1>
 			<?= form_open() ?>
-			<table class="sortable listing centerCells">
+			<table class="dataTable sortable listing centerCells">
 				<thead>
 					<tr>
 						<th>Action</th>

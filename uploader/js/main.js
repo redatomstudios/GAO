@@ -12,6 +12,8 @@
 /*jslint nomen: true, unparam: true, regexp: true */
 /*global $, window, document */
 
+var baseUrl = '/GAO/';
+
 $(function () {
     'use strict';
 
@@ -19,8 +21,10 @@ $(function () {
     $('.fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},
-        url: 'server/php/'
+        url: baseUrl + 'uploader/server/php/'
     });
+
+    console.log(baseUrl);
 
     // Enable iframe cross-domain access via redirect option:
     $('.fileupload').fileupload(

@@ -2,7 +2,7 @@
 		<div id="pageContent">
 			<h1>Templates</h1>
 			<?= form_open('/dash/templates/delete') ?>
-			<table class="sortable listing centerCells">
+			<table class="dataTable sortable listing centerCells">
 				<thead>
 					<tr>
 						<th>Action</th>

@@ -28,7 +28,7 @@ jQuery(document).ready(function() {
 	 * and then initialize dataTables with the object.
 	 ******************************************************************************************************/
 
-	$('table').each(function() {
+	$('table.dataTable').each(function() {
 		var configString = {};
 
 		configString['aaSorting']	= ( $(this).hasClass("sorted") ? [] : '' );

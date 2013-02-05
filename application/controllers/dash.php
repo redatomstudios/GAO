@@ -174,10 +174,13 @@ class Dash extends CI_Controller {
 			$pages = array();
 			foreach ($templates as $template) {
 				# code...
-				if($ps = $this->pagesModel->getPages($template['tableName']))
+				$data1['templates'][] = $template['templateName'];
+				if($ps = $this->pagesModel->getPages($template['tableName'])){
+					$ps['template'] = $template['templateName'];
 					$pages = array_merge($pages, $ps);
+				}
 			}
-			// print_r($pages);
+			$data1['pages'] = $pages;
 
 
 
@@ -195,7 +198,7 @@ class Dash extends CI_Controller {
 
 		$this->load->view('dashboard/header');
 		$this->load->view('dashboard/sidebar', $data);
-		$this->load->view($activeView, $data);
+		$this->load->view($activeView, $data1);
 		$this->load->view('dashboard/footer');
 	}
 

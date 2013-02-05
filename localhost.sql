@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 05, 2013 at 01:43 PM
+-- Generation Time: Feb 05, 2013 at 07:24 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -43,6 +43,23 @@ CREATE TABLE IF NOT EXISTS `fundcontrol` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `skyblue`
+--
+
+DROP TABLE IF EXISTS `skyblue`;
+CREATE TABLE IF NOT EXISTS `skyblue` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `PageTitle` varchar(50) DEFAULT NULL,
+  `PageName` varchar(50) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `PageContent` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `PageName` (`PageName`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `templates`
 --
 
@@ -56,7 +73,14 @@ CREATE TABLE IF NOT EXISTS `templates` (
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `tableName` (`tableName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+
+--
+-- Dumping data for table `templates`
+--
+
+INSERT INTO `templates` (`id`, `templateName`, `userView`, `cmsView`, `tableName`, `timestamp`) VALUES
+(10, 'SkyBlue', 'index.php', 'view_cms.php', 'SkyBlue', '2013-02-05 17:53:30');
 
 -- --------------------------------------------------------
 

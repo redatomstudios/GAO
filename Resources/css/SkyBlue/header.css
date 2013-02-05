@@ -1,0 +1,44 @@
+/* Header styles */
+
+header {
+	height: 90px;
+	width: 1078px;
+	margin: 0 auto;
+	font: 0.875em "Roboto Condensed", Arial, Verdana, sans-serif;
+	font-weight: 300;
+	letter-spacing: 1px;
+	color: #147BC2;
+}
+
+header:after {
+	content: '.';
+	clear: both;
+	visibility: hidden;
+	height: 0;
+	overflow: hidden;
+}
+
+header #headerLogo {
+	margin-top: -68px;
+	/*margin-left: -28px;*/
+	position: relative;
+	float: left;
+	width: 274px;
+	margin-left: -5px;
+}
+
+header #headerNav {
+	float: right;
+}
+
+header #headerNav li {
+	float: right;
+	padding: 10px 20px;
+	margin-top: 5px;
+	border-left: solid thin rgba(0, 0, 0, 0.05);
+	font-size: 1.2em;
+}
+
+header #headerNav li:last-child {
+	border: none;
+}

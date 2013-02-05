@@ -214,7 +214,7 @@
 
 						foreach ($fields as $field) {
 						
-						if($field['Field'] == 'id')
+						if($field['Field'] == 'id' || $field['Field'] == 'timestamp')
 							continue;
 						$type = $field['Type'];
 						$type = explode('(', $type);

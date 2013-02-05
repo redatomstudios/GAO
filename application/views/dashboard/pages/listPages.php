@@ -12,17 +12,17 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php for($pageID = 0; $pageID < 5; $pageID++) { ?>
-					<?php // foreach($pages as $thisPage) { ?>
+					<?php //for($pageID = 0; $pageID < 5; $pageID++) { ?>
+					<?php  foreach($pages as $thisPage) { ?>
 					<tr>
 						<td>
 							<input type="checkbox" name="pageDeletions[]" value="<?= $pageID ?>" /> 
-							<a href="<?= base_url() ?>dash/deletePage/<?= $pageID ?>" >Delete</a>, 
-							<a href="<?= base_url() ?>dash/pages/<?= $pageID ?>" >Edit</a>
+							<a href="<?= base_url() ?>dash/deletePage/<?= $thisPage['id'] ?>" >Delete</a>, 
+							<a href="<?= base_url() ?>dash/pages/<?= $thisPage['id'] ?>" >Edit</a>
 						</td>
-						<td>Home</td>
-						<td>12/12/2013</td>
-						<td>Casefile</td>
+						<td><?= $thisPage['PageTitle'] ?></td>
+						<td><?= $thisPage['timestamp'] ?></td>
+						<td><?= $thisPage['templateName'] ?></td>
 					</tr>
 					<?php } ?>
 				</tbody>
@@ -31,10 +31,9 @@
 				<input type="submit" name="deletePages" value="Delete Selected" /> or 
 				<select name="pageTemplate">
 					<option selected="selected">Select a template</option>
-					<option>Template 1</option>
-					<option>Template 2</option>
-					<option>Template 3</option>
-					<option>Template 4</option>
+					<?php foreach ($templates as $template) { ?>
+					<option><?= $template ?></option>
+					<?php } ?>
 				</select> and
 				<input type="button" name="newPage" value="Create New Page" /> with template.
 

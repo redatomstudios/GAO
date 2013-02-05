@@ -12,7 +12,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php for($i = 0; $i < 5; $i++) { ?>
+					<?php for($pageID = 0; $pageID < 5; $pageID++) { ?>
 					<?php // foreach($pages as $thisPage) { ?>
 					<tr>
 						<td>

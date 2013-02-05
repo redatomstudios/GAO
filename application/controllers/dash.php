@@ -59,7 +59,7 @@ class Dash extends CI_Controller {
 					$fields = array();
 					for($i=0; $i<sizeof($post['fieldName']);$i++){
 						if($post['fieldName'][$i] != '')
-							$fields[$i] = array(
+							$fields[] = array(
 								'fieldName' => $post['fieldName'][$i],
 								'fieldType' => $post['fieldType'][$i],
 								'fieldLength' => $post['fieldLength'][$i],
@@ -158,12 +158,29 @@ class Dash extends CI_Controller {
 	}
 
 	public function pages($pageID = 0) {
+		$this->load->model('templatesModel');
+		$this->load->model('pagesModel');
+
 		$data['thisPage'] = 'pages';
 
 		$activeView = '';
 		if(!$pageID) {
 			// No page specified, so list all the current pages
 			$activeView = 'dashboard/pages/listPages';
+
+			$templates = $this->templatesModel->getTemplates();
+			// echo "<pre>";
+			// print_r($templates);
+			$pages = array();
+			foreach ($templates as $template) {
+				# code...
+				if($ps = $this->pagesModel->getPages($template['tableName']))
+					$pages = array_merge($pages, $ps);
+			}
+			// print_r($pages);
+
+
+
 		} else {
 			// Since the view for each template is different, set $activeView to the 
 			// CMS View corresponding to the template used by the selected page.

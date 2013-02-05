@@ -32,7 +32,10 @@ class TemplatesModel extends CI_Model{
 		# code...
 		if($this->db->insert('templates', $data)){
 
-			$query = 'CREATE TABLE '. $data['tableName'] . '( id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT, ';
+			$query = 'CREATE TABLE '. $data['tableName'] . '( id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+				PageTitle varchar(50), 
+				PageName varchar(50) NOT NULL UNIQUE KEY, 
+				`timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, ';
 			foreach ($fields as $field) {
 				$query .= $field['fieldName'] . ' ' . $field['fieldType'] ;
 				$query .= ($field['fieldLength']!=''?'('.$field['fieldLength'].'), ':'(10), ');

@@ -300,7 +300,7 @@
 					<?php } } ?>
 				</tbody>
 			</table>
-			<input type="hidden" value="<?= $identifier ?>" />
+			<input type="hidden" name="identifier" value="<?= $identifier ?>" />
 			<p style="display: none;">
 				<button type="submit">Save Template</button> <button type="button" id="addField">Add Field</button>
 			</p>
@@ -314,7 +314,7 @@
 					<tr>
 						<td>
 					    <form id="fileupload" class="fileupload" method="POST" enctype="multipart/form-data">
-					    		<input type="hidden" value="<?= $identifier ?>" />
+					    		<input type="hidden" name="identifier" value="<?= $identifier ?>" />
 					        <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
 					        <div class="row fileupload-buttonbar">
 					            <div class="span7">

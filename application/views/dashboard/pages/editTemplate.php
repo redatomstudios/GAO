@@ -37,6 +37,18 @@
 							
 						</td>
 					</tr>
+
+					<tr>
+						<td colspan="3">
+							<label for="cmsView">CSS Files:</label>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							
+						</td>
+					</tr>
+
 				</tbody>
 			</table>
 			<h2>

@@ -212,26 +212,28 @@ class Dash extends CI_Controller {
 		$template = $this->templatesModel->getTemplate($templateId);
 		$templateFolder = $template['tableName'];
 
-		$css = '';
+		$data['css'] = '';
 		$idDir = $_SERVER['DOCUMENT_ROOT'] . base_url(). 'Resources';
 		if($handle = opendir("$idDir/css/$templateFolder")){
 			while (false !== ($entry = readdir($handle))) {
 				if ($entry != "." && $entry != "..") {
 					// echo "</br>$entry";
-					$css .= '<link href="/GAO/resources/css/' . "$templateFolder/$entry" . '" rel="stylesheet">';
+					$data['css'] .= '<link href="/GAO/resources/css/' . "$templateFolder/$entry" . '" rel="stylesheet">';
 				}
 			}
 		}
 		// echo "</br>";
-		$js = '';
+		$data['js'] = '';
 		if($handle = opendir("$idDir/js/$templateFolder")){
 			while (false !== ($entry = readdir($handle))) {
 				if ($entry != "." && $entry != "..") {
 					// echo "</br>$entry";
-					$js .= '<script src="/GAO/resources/js/' . "$templateFolder/$entry" . '"></script>';
+					$data['js'] .= '<script src="/GAO/resources/js/' . "$templateFolder/$entry" . '"></script>';
 				}
 			}
 		}
+
+		$this->load->view("templates/$templateFolder/" . $template['cmsView'], $data);
 	}
 
 	public function temp() {

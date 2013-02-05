@@ -17,7 +17,7 @@ class Dash extends CI_Controller {
 		$this->load->view('dashboard/footer');
 	}
 
-	public function templates($templateID = 0) {
+	public function templates($templateID = 0, $tId = 0) {
 		$this->load->model('templatesModel');
 
 		$view = 1;
@@ -39,7 +39,6 @@ class Dash extends CI_Controller {
 
 				if(!$post = $this->input->post()){
 					$data1['pageHeading'] = 'New Template';
-					
 				}
 				else{
 					$view = 0;
@@ -47,10 +46,14 @@ class Dash extends CI_Controller {
 					$this->load->model('templatesModel');
 
 					$templateName = preg_replace('/[^a-zA-Z0-9]/', '_', $post['templateName']);
+
+
 					$d = $this->mylibrary->uploader($templateName, 'publicView');
 					$data['userView'] = $d['filename'];
 					$d = $this->mylibrary->uploader($templateName, 'cmsView');
 					$data['cmsView'] = $d['filename'];
+
+
 					$data['templateName'] = $post['templateName'];
 					$data['tableName'] = $templateName;
 					$fields = array();
@@ -66,6 +69,42 @@ class Dash extends CI_Controller {
 					}
 
 					$this->templatesModel->createTemplate($data, $fields);
+
+					// Moving the files from uploader folder
+					$identifier = $post['identifier'];
+					$idDir = $_SERVER['DOCUMENT_ROOT'] . base_url(). 'uploader/server/php/files/' . $identifier;
+					if($handle = opendir($idDir)){
+
+						$dir = $_SERVER['DOCUMENT_ROOT'] . base_url(). 'Resources/';
+						if(!is_dir($dir . 'js/' . $templateName))
+                   			mkdir($dir . 'js/' . $templateName);
+                   		if(!is_dir($dir . 'css/' . $templateName))
+                   			mkdir($dir . 'css/' . $templateName);
+                   		if(!is_dir($dir . 'images/' . $templateName))
+                   			mkdir($dir . 'images/' . $templateName);
+
+
+						while (false !== ($entry = readdir($handle))) {
+					        if ($entry != "." && $entry != ".." && (sizeof($file = explode('.', $entry)) > 1)) {
+					        	$ext = $file[sizeof($file)-1];
+					        	// echo "</br> $entry";
+					            if($ext == 'css' || ($ext == 'php' && $file[0] == 'styles')){
+					            	//move entry to css folder
+					            	copy("$idDir/$entry", "$dir/css/$templateName/$entry");
+					            }
+					            elseif ($ext == 'js' || $ext == 'php') {
+					            	//move entry to js folder
+					            	copy("$idDir/$entry", "$dir/js/$templateName/$entry");
+					            }
+					            else{
+					            	//move entry to images folder
+					            	copy("$idDir/$entry", "$dir/images/$templateName/$entry");
+					            }
+					        }
+					    }
+					}
+
+					$this->mylibrary->deleteDirectory($idDir);
 					redirect('/dash/templates');
 				}
 
@@ -75,15 +114,30 @@ class Dash extends CI_Controller {
 				$this->load->library('mylibrary');
 				if($post = $this->input->post()){
 					// print_r($post['templateDeletions']);
-					foreach ($post['templateDeletions'] as $templateId) {
-						# code...
-						$t = $this->templatesModel->getTemplate($templateId);
-						$templateIds[] = $t['id'];
-						$templateTables[] = $t['tableName'];
-						$this->templatesModel->deleteTemplate($t['id'], $t['tableName']);
-						$this->mylibrary->deleteDirectory($_SERVER['DOCUMENT_ROOT'] . base_url(). 'application/views/templates/' . $t['tableName']);
-					}
+					$templates = $post['templateDeletions'];
+				}else{
+					$templates = array($tId);
 				}
+				foreach ($templates as $templateId) {
+					# code...
+					$t = $this->templatesModel->getTemplate($templateId);
+					$templateIds[] = $t['id'];
+					$templateTables[] = $t['tableName'];
+					$this->templatesModel->deleteTemplate($t['id'], $t['tableName']);
+
+
+					if(is_dir($_SERVER['DOCUMENT_ROOT'] . base_url() . "Resources/css/" . $t['tableName']))
+						$this->mylibrary->deleteDirectory($_SERVER['DOCUMENT_ROOT'] . base_url() . "Resources/css/" . $t['tableName']);
+					if(is_dir($_SERVER['DOCUMENT_ROOT'] . base_url() . "Resources/js/" . $t['tableName']))
+						$this->mylibrary->deleteDirectory($_SERVER['DOCUMENT_ROOT'] . base_url() . "Resources/js/" . $t['tableName']);
+					if(is_dir($_SERVER['DOCUMENT_ROOT'] . base_url() . "Resources/images/" . $t['tableName']))
+						$this->mylibrary->deleteDirectory($_SERVER['DOCUMENT_ROOT'] . base_url() . "Resources/images/" . $t['tableName']);
+
+
+					$this->mylibrary->deleteDirectory($_SERVER['DOCUMENT_ROOT'] . base_url(). 'application/views/templates/' . $t['tableName']);
+
+				}
+				
 				redirect('/dash/templates');
 
 			} else {

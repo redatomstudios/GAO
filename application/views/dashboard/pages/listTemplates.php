@@ -17,7 +17,7 @@
 					<tr>
 						<td>
 							<input type="checkbox" name="templateDeletions[]" value="<?= $thisTemplate['id'] ?>" /> 
-							<a href="<?= base_url() ?>dash/deleteTemplate/<?= $thisTemplate['id'] ?>" >Delete</a>, 
+							<a href="<?= base_url() ?>dash/templates/delete/<?= $thisTemplate['id'] ?>" >Delete</a>, 
 							<a href="<?= base_url() ?>dash/templates/<?= $thisTemplate['id'] ?>" >Edit</a>
 						</td>
 						<td><?= $thisTemplate['templateName'] ?></td>

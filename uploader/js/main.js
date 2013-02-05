@@ -24,8 +24,6 @@ $(function () {
         url: baseUrl + 'uploader/server/php/'
     });
 
-    console.log(baseUrl);
-
     // Enable iframe cross-domain access via redirect option:
     $('.fileupload').fileupload(
         'option',

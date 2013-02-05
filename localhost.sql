@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 28, 2013 at 06:58 PM
+-- Generation Time: Feb 05, 2013 at 01:43 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -56,14 +56,7 @@ CREATE TABLE IF NOT EXISTS `templates` (
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `tableName` (`tableName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
---
--- Dumping data for table `templates`
---
-
-INSERT INTO `templates` (`id`, `templateName`, `userView`, `cmsView`, `tableName`, `timestamp`) VALUES
-(4, 'test template', 'libglesv22.dll', 'npchrome_frame.dll', 'test_template', '2013-01-28 17:53:47');
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 -- --------------------------------------------------------
 

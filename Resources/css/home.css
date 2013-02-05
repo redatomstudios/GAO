@@ -11,7 +11,7 @@
 	margin: 20px 10px;
 }
 
-#pageContent input[type="text"], #pageContent select, #pageContent textarea {
+#pageContent table input[type="text"], #pageContent table select, #pageContent table textarea {
 	width: 100%;
 }
 

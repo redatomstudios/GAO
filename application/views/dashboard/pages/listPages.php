@@ -28,16 +28,20 @@
 				</tbody>
 			</table>
 			<p>
-				<input type="submit" name="deletePages" value="Delete Selected" /> or 
+				<input type="submit" name="deletePages" value="Delete Selected" />
+				<?= form_close() ?> 
+
+				or
+
+				<?= form_open() ?>
 				<select name="pageTemplate">
 					<option selected="selected">Select a template</option>
 					<?php foreach ($templates as $template) { ?>
 					<option><?= $template ?></option>
 					<?php } ?>
 				</select> and
-				<input type="button" name="newPage" value="Create New Page" /> with template.
-
+				<input type="submit" name="newPage" value="Create New Page" /> with template.
+				<?= form_close() ?>
 			</p>
-			<?= form_close() ?>
 		</div>
 	</div>

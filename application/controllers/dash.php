@@ -65,7 +65,7 @@ class Dash extends CI_Controller {
 								'fieldLength' => $post['fieldLength'][$i],
 								'fieldDefault' => $post['fieldDefault'][$i]);
 						else
-							break;
+							continue;
 					}
 
 					$this->templatesModel->createTemplate($data, $fields);

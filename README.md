@@ -1,1 +1,1 @@
-In Create Template form, check the issue with 'Add Field' button
+Move 'Add Field' button just below all the fields

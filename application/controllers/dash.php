@@ -206,6 +206,7 @@ class Dash extends CI_Controller {
 		# code...
 
 		$this->load->model('templatesModel');
+		$data['thisPage'] = 'pages';
 
 
 		$templateId = $this->input->post('pageTemplate');
@@ -233,7 +234,10 @@ class Dash extends CI_Controller {
 			}
 		}
 
+		$this->load->view('dashboard/header');
+		$this->load->view('dashboard/sidebar', $data);
 		$this->load->view("templates/$templateFolder/" . $template['cmsView'], $data);
+		$this->load->view('dashboard/footer');
 	}
 
 	public function temp() {

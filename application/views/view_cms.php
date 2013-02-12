@@ -27,14 +27,25 @@
 						</td>
 					</tr>
 					<tr>
+						<td>
+							<label for="publicView">Page Title:</label>
+						</td>
+						<td>
+							<input type="text" name="pageTitle" id="pageTitle" placeholder="Title that shows up on the page" />
+						</td>
+						<td>
+							
+						</td>
+					</tr>
+					<tr>
 						<td colspan="2">
-							<label for="cmsView">Page Content:</label>
+							<label for="pageContent">Page Content:</label>
 						</td>
 						<td></td>
 					</tr>
 					<tr>
 						<td colspan="2">
-							<textarea name="cmsView" id="cmsView" placeholder="Enter webpage HTML content here"></textarea>
+							<textarea name="pageContent" id="pageContent" placeholder="Enter webpage HTML content here"></textarea>
 						</td>
 						<td></td>
 					</tr>

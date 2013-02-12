@@ -33,8 +33,9 @@ class TemplatesModel extends CI_Model{
 		if($this->db->insert('templates', $data)){
 
 			$query = 'CREATE TABLE '. $data['tableName'] . '( id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT, 
-				PageTitle varchar(50), 
-				PageName varchar(50) NOT NULL UNIQUE KEY, 
+				pageTitle varchar(50), 
+				pageName varchar(50) NOT NULL UNIQUE KEY, 
+				pageHeading varchar(50), 
 				`timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, ';
 			foreach ($fields as $field) {
 				$query .= $field['fieldName'] . ' ' . $field['fieldType'] ;

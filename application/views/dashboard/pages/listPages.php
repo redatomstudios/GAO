@@ -16,11 +16,11 @@
 					<?php  foreach($pages as $thisPage) { ?>
 					<tr>
 						<td>
-							<input type="checkbox" name="pageDeletions[]" value="<?= $pageID ?>" /> 
+							<input type="checkbox" name="pageDeletions[]" value="<?= $thisPage['id'] ?>" /> 
 							<a href="<?= base_url() ?>dash/deletePage/<?= $thisPage['id'] ?>" >Delete</a>, 
 							<a href="<?= base_url() ?>dash/pages/<?= $thisPage['id'] ?>" >Edit</a>
 						</td>
-						<td><?= $thisPage['PageTitle'] ?></td>
+						<td><?= $thisPage['pageTitle'] ?></td>
 						<td><?= $thisPage['timestamp'] ?></td>
 						<td><?= $thisPage['templateName'] ?></td>
 					</tr>
@@ -33,7 +33,7 @@
 
 				or
 
-				<?= form_open('/dash/newPage') ?>
+				<?= form_open('/dash/newPageCMS') ?>
 				<select name="pageTemplate">
 					<option selected="selected">Select a template</option>
 					<?php foreach ($templates as $templateId => $template) { ?>

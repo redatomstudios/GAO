@@ -175,11 +175,13 @@ class Dash extends CI_Controller {
 			foreach ($templates as $template) {
 				# code...
 				$data1['templates'][$template['id']] = $template['templateName'];
-				if($ps = $this->pagesModel->getPages($template['tableName'])){
-					$ps['template'] = $template['templateName'];
+				if($ps = $this->pagesModel->getPages($template['tableName'], $template['tableName'])){
+					// $ps['template'] = $template['templateName'];
 					$pages = array_merge($pages, $ps);
 				}
 			}
+			// echo "<pre>";
+			// print_r($pages);
 			$data1['pages'] = $pages;
 
 
@@ -202,54 +204,53 @@ class Dash extends CI_Controller {
 		$this->load->view('dashboard/footer');
 	}
 
-	public function newPage(){
+	public function newPageCMS(){
 		# code...
 
 		$this->load->model('templatesModel');
-		$data['thisPage'] = 'pages';
-
-
-		$templateId = $this->input->post('pageTemplate');
-		$template = $this->templatesModel->getTemplate($templateId);
-		$templateFolder = $template['tableName'];
-
-		$data['css'] = '';
-		$idDir = $_SERVER['DOCUMENT_ROOT'] . base_url(). 'Resources';
-		if($handle = opendir("$idDir/css/$templateFolder")){
-			while (false !== ($entry = readdir($handle))) {
-				if ($entry != "." && $entry != "..") {
-					// echo "</br>$entry";
-					$data['css'] .= '<link href="/GAO/resources/css/' . "$templateFolder/$entry" . '" rel="stylesheet">';
+		$this->load->model('pagesModel');
+		//Make sure there is no input with name 'pageTemplate' in the cms view
+		if($templateId = $this->input->post('pageTemplate'))
+		{
+			$data['thisPage'] = 'pages';
+			$template = $this->templatesModel->getTemplate($templateId);
+			$templateFolder = $template['tableName'];
+			$data['templateId'] = $templateId;
+			$data['css'] = '';
+			$idDir = $_SERVER['DOCUMENT_ROOT'] . base_url(). 'Resources';
+			if($handle = opendir("$idDir/css/$templateFolder")){
+				while (false !== ($entry = readdir($handle))) {
+					if ($entry != "." && $entry != "..") {
+						// echo "</br>$entry";
+						$data['css'] .= '<link href="/GAO/resources/css/' . "$templateFolder/$entry" . '" rel="stylesheet">';
+					}
 				}
 			}
-		}
-		// echo "</br>";
-		$data['js'] = '';
-		if($handle = opendir("$idDir/js/$templateFolder")){
-			while (false !== ($entry = readdir($handle))) {
-				if ($entry != "." && $entry != "..") {
-					// echo "</br>$entry";
-					$data['js'] .= '<script src="/GAO/resources/js/' . "$templateFolder/$entry" . '"></script>';
+			// echo "</br>";
+			$data['js'] = '';
+			if($handle = opendir("$idDir/js/$templateFolder")){
+				while (false !== ($entry = readdir($handle))) {
+					if ($entry != "." && $entry != "..") {
+						// echo "</br>$entry";
+						$data['js'] .= '<script src="/GAO/resources/js/' . "$templateFolder/$entry" . '"></script>';
+					}
 				}
 			}
+
+			$this->load->view('dashboard/header');
+			$this->load->view('dashboard/sidebar', $data);
+			$this->load->view("templates/$templateFolder/" . $template['cmsView'], $data);
+			$this->load->view('dashboard/footer');
+		}else{
+			$post = $this->input->post();
+			$templateId = $post['templateId'];
+			unset($post['templateId']);
+
+			$this->pagesModel->createPage($post, $templateId);
 		}
-
-		$this->load->view('dashboard/header');
-		$this->load->view('dashboard/sidebar', $data);
-		$this->load->view("templates/$templateFolder/" . $template['cmsView'], $data);
-		$this->load->view('dashboard/footer');
 	}
 
-	public function temp() {
-		$data['pageHeading'] = 'New Page';
-		$data['thisPage'] = 'pages';
-				
-		$this->load->view('dashboard/header');
-		$this->load->view('dashboard/sidebar', $data);
-		$this->load->view('view_cms');
-		$this->load->view('dashboard/footer');
-	}
-
+	
 }
 
 ?>

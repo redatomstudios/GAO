@@ -1,13 +1,8 @@
 	<div id="bodyWrap">
-		<style>
-		<?= $css ?>
-		</style>
-		<script>
-		<?= $js ?>
-		</script>
 		<div id="pageContent">
 			<h1>New Page</h1>
 			<?= form_open() ?>
+			<input type="hidden" name="templateId" value="<?= $templateId ?>"/>
 			<table class="sortable listing">
 				<tbody>
 					<tr>
@@ -34,13 +29,13 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<label for="cmsView">Page Content:</label>
+							<label for="pageContent">Page Content:</label>
 						</td>
 						<td></td>
 					</tr>
 					<tr>
 						<td colspan="2">
-							<textarea name="cmsView" id="cmsView" placeholder="Enter webpage HTML content here"></textarea>
+							<textarea name="pageContent" id="pageContent" placeholder="Enter webpage HTML content here"></textarea>
 						</td>
 						<td></td>
 					</tr>

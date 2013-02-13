@@ -12,7 +12,6 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php // for($i = 0; $i < 5; $i++) { ?>
 					<?php  foreach($templates as $thisTemplate) { ?>
 					<tr>
 						<td>
@@ -28,7 +27,7 @@
 						else{
 							foreach ($thisTemplate['pageDetails'] as $page) {
 								# code...
-								$pages[] = $page['PageName'];
+								$pages[] = $page['pageName'];
 							}
 							$pages = implode(',', $pages);
 						}

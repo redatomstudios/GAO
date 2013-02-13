@@ -174,7 +174,7 @@ class Dash extends CI_Controller {
 			$pages = array();
 			foreach ($templates as $template) {
 				# code...
-				$data1['templates'][$template['id']] = $template['templateName'];
+				$data['templates'][$template['id']] = $template['templateName'];
 				if($ps = $this->pagesModel->getPages($template['tableName'], $template['tableName'])){
 					// $ps['template'] = $template['templateName'];
 					$pages = array_merge($pages, $ps);
@@ -182,7 +182,7 @@ class Dash extends CI_Controller {
 			}
 			// echo "<pre>";
 			// print_r($pages);
-			$data1['pages'] = $pages;
+			$data['pages'] = $pages;
 
 
 
@@ -191,16 +191,21 @@ class Dash extends CI_Controller {
 			// CMS View corresponding to the template used by the selected page.
 			$activeView = 'dashboard/pages/editTemplate'; // <-- I'm just loading this temporarily :o
 			if($pageID == 'new') {
+				$post = $this->input->post();
+				// So first let's get the CMS view from the table:
+				$currentTemplate = $post['pageTemplate'];
+
 				// This is a new page, load the empty CMS view
 				$data['pageHeading'] = 'New Page';
 			} else {
 				// This is a pre-existing page that's being edited, load values from DB 
+				$data['pageHeading'] = 'Edit Page';
 			}
 		}
 
 		$this->load->view('dashboard/header');
 		$this->load->view('dashboard/sidebar', $data);
-		$this->load->view($activeView, $data1);
+		$this->load->view($activeView, $data);
 		$this->load->view('dashboard/footer');
 	}
 

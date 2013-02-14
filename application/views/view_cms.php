@@ -1,5 +1,5 @@
 	<div id="bodyWrap">
-		<div id="pageContent">
+		<div class="pageContent">
 			<h1>New Page</h1>
 			<?= form_open() ?>
 			<table class="sortable listing">

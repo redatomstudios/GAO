@@ -1,5 +1,5 @@
 	<div id="bodyWrap">
-		<div id="pageContent">
+		<div class="pageContent">
 			<h1>Pages</h1>
 			<?= form_open() ?>
 			<table class="dataTable sortable listing centerCells">

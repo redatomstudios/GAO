@@ -1,5 +1,5 @@
 	<div id="bodyWrap">
-		<div id="pageContent">
+		<div class="pageContent">
 			<h1>Templates</h1>
 			<?= form_open('/dash/templates/delete') ?>
 			<table class="dataTable sortable listing centerCells">

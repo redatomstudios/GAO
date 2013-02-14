@@ -1,4 +1,4 @@
-		<div id="pageContent">
+		<div class="pageContent">
 			<h1>Dashboard</h1>
 			<p>
 				General Settings here: Logo selection etc.

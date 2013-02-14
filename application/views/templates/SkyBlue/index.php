@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>Personal Charity Fundraisers :: Give As One</title>
-		<link href='http://fonts.googleapis.com/css?family=Poiret+One|Advent+Pro:400,600|Prosto+One|Roboto+Condensed:400,300' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300' rel='stylesheet' type='text/css'>
 		<link href="css/reset.css" rel="stylesheet" />
 		<link href="css/general.css" rel="stylesheet" />
 		<link href="css/header.css" rel="stylesheet" />
@@ -24,7 +24,7 @@
 			</ul>
 		</header>
 		<div id="pageWrap">
-			<div id="pageContent">
+			<div class="pageContent">
 				<ul class="liteSlide">
 					<li style="background-image: url('images/slide_2.jpg');"></li>
 					<li style="background-image: url('images/slide_1.jpg');"></li>

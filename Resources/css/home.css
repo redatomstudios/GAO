@@ -1,4 +1,4 @@
-#pageContent {
+.pageContent {
 	/*width: 755px;*/
 	width: 100%;
 	float: left;
@@ -7,15 +7,15 @@
 	box-sizing: border-box;
 }
 
-#pageContent p {
+.pageContent p {
 	margin: 20px 10px;
 }
 
-#pageContent table input[type="text"], #pageContent table select, #pageContent table textarea {
+.pageContent table input[type="text"], .pageContent table select, .pageContent table textarea {
 	width: 100%;
 }
 
-#pageContent textarea {
+.pageContent textarea {
 	min-height: 300px;
 	resize: none;
 }

@@ -222,7 +222,6 @@ class Dash extends CI_Controller {
 		//Make sure there is no input with name 'pageTemplate' in the cms view
 		if($templateId = $this->input->post('pageTemplate')) {
 			$data['thisPage'] = 'pages';
-			echo $templateId;
 			$template = $this->templatesModel->getTemplate($templateId);
 			$templateFolder = $template['tableName'];
 			$data['templateId'] = $templateId;

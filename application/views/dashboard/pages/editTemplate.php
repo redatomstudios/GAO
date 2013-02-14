@@ -10,7 +10,7 @@
 
 	?>
 	<div id="bodyWrap">
-		<div id="pageContent">
+		<div class="pageContent">
 			<h1><?= isset($pageHeading) ? $pageHeading : "Edit Template" ?></h1>
 
 			<?= form_open_multipart() ?>

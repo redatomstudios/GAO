@@ -161,12 +161,18 @@ class Dash extends CI_Controller {
 		$this->load->model('templatesModel');
 		$this->load->model('pagesModel');
 
+		$post = $this->input->post();
 		$data['thisPage'] = 'pages';
 
 		$activeView = '';
 		if(!$pageID) {
 			// No page specified, so list all the current pages
 			$activeView = 'dashboard/pages/listPages';
+
+			// Check if any deletions need to be processed before loading the pages list
+			if($post && isset($post['deletePages']) && sizeof($post['pageDeletions'])) {
+				// delete pages with ids found in $post['pageDeletions']
+			}
 
 			$templates = $this->templatesModel->getTemplates();
 			// echo "<pre>";
@@ -183,22 +189,21 @@ class Dash extends CI_Controller {
 			// echo "<pre>";
 			// print_r($pages);
 			$data['pages'] = $pages;
-
-
-
 		} else {
-			// Since the view for each template is different, set $activeView to the 
-			// CMS View corresponding to the template used by the selected page.
-			$activeView = 'dashboard/pages/editTemplate'; // <-- I'm just loading this temporarily :o
-			if($pageID == 'new') {
-				$post = $this->input->post();
-				// So first let's get the CMS view from the table:
-				$currentTemplate = $post['pageTemplate'];
+			/*
+			 * This means a new page is being created, or a page is being edited
+			 * Since the view for each template is different, set $activeView to the 
+			 * CMS View corresponding to the template used by the selected page.
+			 */
 
-				// This is a new page, load the empty CMS view
+			$activeView = 'dashboard/pages/editTemplate'; // <-- I'm just loading this temporarily :o
+
+			if(isset($post['newPage'])) {
+				// They're trying to create a new page
 				$data['pageHeading'] = 'New Page';
+				$currentTemplate = $post['pageTemplate'];
 			} else {
-				// This is a pre-existing page that's being edited, load values from DB 
+				// They're editing a pre-existing page
 				$data['pageHeading'] = 'Edit Page';
 			}
 		}
@@ -215,9 +220,9 @@ class Dash extends CI_Controller {
 		$this->load->model('templatesModel');
 		$this->load->model('pagesModel');
 		//Make sure there is no input with name 'pageTemplate' in the cms view
-		if($templateId = $this->input->post('pageTemplate'))
-		{
+		if($templateId = $this->input->post('pageTemplate')) {
 			$data['thisPage'] = 'pages';
+			echo $templateId;
 			$template = $this->templatesModel->getTemplate($templateId);
 			$templateFolder = $template['tableName'];
 			$data['templateId'] = $templateId;
@@ -246,12 +251,17 @@ class Dash extends CI_Controller {
 			$this->load->view('dashboard/sidebar', $data);
 			$this->load->view("templates/$templateFolder/" . $template['cmsView'], $data);
 			$this->load->view('dashboard/footer');
-		}else{
-			$post = $this->input->post();
-			$templateId = $post['templateId'];
-			unset($post['templateId']);
+		} else {
+			if($templateId) {
+				$post = $this->input->post();
+				$templateId = $post['templateId'];
+				unset($post['templateId']);
 
-			$this->pagesModel->createPage($post, $templateId);
+				$this->pagesModel->createPage($post, $templateId);
+				redirect('dash/pages?n=' . 'Page created successfully.');
+			} else {
+				redirect('dash/pages?n=' . 'Please select a template.');
+			}
 		}
 	}
 

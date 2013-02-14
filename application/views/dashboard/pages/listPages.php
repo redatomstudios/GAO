@@ -28,14 +28,10 @@
 				</tbody>
 			</table>
 			<p>
-				<input type="submit" name="deletePages" value="Delete Selected" />
-				<?= form_close() ?> 
-
-				or
-
-				<?= form_open('/dash/newPageCMS') ?>
+				<input type="submit" name="deletePages" value="Delete Selected" style="float: left; margin-right: 5px;" />
+				<?= form_close() ?> or <?= form_open('/dash/newPageCMS', array('style' => 'display: inline;')) ?>
 				<select name="pageTemplate">
-					<option selected="selected">Select a template</option>
+					<option value="0" selected="selected">Select a template</option>
 					<?php foreach ($templates as $templateId => $template) { ?>
 					<option value="<?= $templateId ?>"><?= $template ?></option>
 					<?php } ?>

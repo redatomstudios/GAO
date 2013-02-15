@@ -6,6 +6,6 @@ RewriteBase /GAO/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-# For reuests that are not actual files or directories,
+# For requests that are not actual files or directories,
 # Rewrite to index.php/URL
 RewriteRule ^(.*)$ index.php?/$1 [PT,L]

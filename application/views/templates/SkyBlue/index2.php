@@ -31,52 +31,51 @@
 			<div id="sidebar">
 				<nav>
 					<ul>
-						<li><a href="index.php">Home</a></li>
-						<li><a href="about.php">About Us</a></li>
-						<li><a href="contact.php">Contact Us</a></li>
-						<li><a href="how.php">How It Works</a></li>
-						<li><a href="terms.php">Terms of Service</a></li>
-						<li><a href="privacy.php">Privacy Policy</a></li>
-						<li><a href="register.php">Register Now</a></li>
+						<?php
+							foreach($navItems as $thisNav) {
+						?>
+						<li><a href="<?= base_url() ?>/<?= $thisNav['pageName'] ?>"><?= $thisNav['pageTitle'] ?></a></li>
+						<?php
+							}
+						?>
 					</ul>
 				</nav>
-				<div class="sideModule">
-					<h2>Success Stories</h2>
-					<h3>Your Fundraiser</h3>
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-					</p>
-					<h3>Another Fundraiser</h3>
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-					</p>
-				</div>
-				<div class="sideModule">
-					<h2>Social Activity</h2>
-					<h3>Twitter</h3>
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-					</p>
-					<h3>Facebook</h3>
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-					</p>
-				</div>
 			</div>
 		</div>
 		<footer>
 			<div class="third">
+				<?php
+
+				$firstGroup = array();
+				$secondGroup = array();
+				foreach($navItems as $index => $thisNav) {
+					if( ($index + 1) % 2 ) {
+						$firstGroup[] = $thisNav;
+					} else {
+						$secondGroup[] = $thisNav;
+					}
+				}
+
+				?>
 				<ul>
-					<li><a href="">Home</a></li>
-					<li><a href="">About Us</a></li>
-					<li><a href="">Contact Us</a></li>
+					<?php
+					foreach($firstGroup as $thisNav) {
+					?>
+					<li><a href="<?= base_url() ?>/<?= $thisNav['pageName'] ?>"><?= $thisNav['pageTitle'] ?></a></li>
+					<?php
+					}
+					?>
 				</ul>
 			</div>
 			<div class="third">
 				<ul>
-					<li><a href="">How It Works</a></li>
-					<li><a href="">Privacy Policy</a></li>
-					<li><a href="">Terms of Service</a></li>
+					<?php
+					foreach($secondGroup as $thisNav) {
+					?>
+					<li><a href="<?= base_url() ?>/<?= $thisNav['pageName'] ?>"><?= $thisNav['pageTitle'] ?></a></li>
+					<?php
+					}
+					?>
 				</ul>
 			</div>
 			<div class="third">

@@ -57,6 +57,9 @@ class Page extends CI_Controller {
 				$pageData = $this->db->get_where($thisTemplate, array('pageName' => $requestPage));
 				$data['pageData'] = $pageData->row_array();
 
+				// Step 3.1 - Get the navigation items
+				$data['navItems'] = $this->createNav();
+
 				// Step 4 - Load the view, passing the $data variable
 				$data['templateName'] = $thisTemplate;
 				$this->load->view('templates/' . $thisTemplate . '/' . $thisView, $data);
@@ -64,10 +67,28 @@ class Page extends CI_Controller {
 				redirect('');
 			}
 		} else {
-			echo "Server misconfiguration: Invalid index definition";
+			echo "CMS misconfiguration: Invalid index definition";
 		}
 	}
 
-}
 
+	private function createNav() {
+	/*
+	 * This function pulls data from the pages table
+	 * and keeps the pages with a navOrder > 0.
+	 * Then it returns an array such that [[pageName, pagePath]]
+	 */
+								$this->db->order_by('navOrder', 'asc');
+		$allPages = $this->db->get('pages');
+		$navPages = array();
+		foreach($allPages->result_array() as $thisPage) {
+			if($thisPage['navOrder']) {
+				$navPages[] = $thisPage;
+			}
+		}
+
+		return $navPages;
+	}
+
+}
 ?>

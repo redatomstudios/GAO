@@ -1,18 +1,11 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Personal Charity Fundraisers :: Give As One</title>
+		<title><?= $pageData['pageTitle'] ?> :: Give As One</title>
 		<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300' rel='stylesheet' type='text/css'>
-		<link href="css/reset.css" rel="stylesheet" />
-		<link href="css/general.css" rel="stylesheet" />
-		<link href="css/header.css" rel="stylesheet" />
-		<link href="css/sidebar.css" rel="stylesheet" />
-		<link href="css/slider.css" rel="stylesheet" />
-		<link href="css/content.css" rel="stylesheet" />
-		<link href="css/footer.css" rel="stylesheet" />
-
-		<script src="js/jquery.1.9.0.min.js"></script>
-		<script src="js/h2o.js"></script>
+		<style>
+			<?php require 'resources/css/' . $templateName . '/styles.php'; ?>
+		</style>
 	</head>
 	<body>
 		<header>
@@ -31,21 +24,8 @@
 					<li style="background-image: url('resources/images/<?= $templateName ?>/slide_3.jpg');"></li>
 				</ul>
 				<div class="fullModule">
-					<h2>Giving has never been so easy.</h2>
-					<p>
-						At Give As One we believe in making it easy to donate to the charity of your choice and we believe that the best way to give to charity is by working together with your friends, family and colleagues so that you can make a real difference to your chosen charity.
-					</p>
-					<p>
-						So if you have a great fundraising idea, why not join Give As One now, tell us what you plan to do and within 10 minutes you will have your own web space on the Give As One website that you can use to tell the world about your charity fundraising project. Your friends, family and colleagues will be able to donate to your chosen charity directly from your web space using their Paypal account of the debit / credit card. Give As One provide this service for free and the only deduction from donations will be the payment processing fees that are charged to us from Paypal.
-					</p>
-					<div class="gallery">
-						<img src="resources/images/<?= $templateName ?>/stock.jpg" />
-						<img src="resources/images/<?= $templateName ?>/wall.jpg" />
-						<img src="resources/images/<?= $templateName ?>/whale.jpg" />
-					</div>
-					<p>
-						What you waiting for, click here to sign up now and get you fundraising project going
-					</p>
+					<h2><?= $pageData['pageHeading'] ?></h2>
+					<?= $pageData['pageContent'] ?>
 				</div>
 			</div>
 			<div id="sidebar">
@@ -106,5 +86,8 @@
 			</div>
 			<div class="clear"></div>
 		</footer>
+		<script>
+			<?php require 'resources/js/' . $templateName . '/scripts.php'; ?>
+		</script>
 	</body>
 </html>

@@ -1,6 +1,6 @@
 /* Content styles */
 
-#pageContent {
+.pageContent {
 	width: 785px;
 	float: right;
 	font: 0.875em "Roboto Condensed", Arial, Verdana, sans-serif;
@@ -12,11 +12,11 @@
 	letter-spacing: 1px;
 }
 
-#pageContent p, #pageContent li {
+.pageContent p, .pageContent li {
 	margin: 0 10px 20px;
 }
 
-#pageContent li {
+.pageContent li {
 	list-style-type: disc;
 }
 
@@ -30,6 +30,6 @@
 	height: 130px;
 }
 
-#pageContent a {
+.pageContent a {
 	display: inline;
 }

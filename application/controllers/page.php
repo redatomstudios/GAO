@@ -10,41 +10,58 @@ class Page extends CI_Controller {
 	}
 
 	public function index($requestPage = '') {
-		// This will load the page which has the name 'index'
-		// The 'index' page is the only page with a required name
-		// and it serves as the entry point into the website
-
+/*
+ * This will load the page which has the name 'index'
+ * The 'index' page is the only page with a required name
+ * and it serves as the entry point into the website
+ * If a $requestPage is specified, then it loads that page
+ * instead.
+ */
 		$basePath = '';
 		$root = $this->db->get_where('pages', array('pageName' => 'index'));
 		$root = $root->row_array();
+
+	/* 
+	 * Here we get the index and check to see if it exists.
+	 * The index is required, so don't proceed without it.
+	 */
 		if($root) {
-			if($requestPage) {
-				// We're loading a subpage, so we need to pull some extra data from the database
-				echo 'Loading subpage: ' . $requestPage;
 
-				// Get the template used by the page
-				$thisPage = $this->db->get_where('pages', array('pageName' => $requestPage));
+		/* 
+		 * If no page was specified, we load the index by default.
+		 */
+			if(!$requestPage) $requestPage = 'index';
+				
+		/*
+		 * Loading a page consists of the following steps:
+		 *   - Get the template used by the page
+		 *   - load the associated filenames from the template table
+		 *   - load the data from the database and store into the $data variable
+		 *     with the same name as each database field name
+		 *   - Load view, passing the $data variable
+		 */
+			// Step 1 - Get the template used by the page
+			$thisPage = $this->db->get_where('pages', array('pageName' => $requestPage));
+			$thisPage = $thisPage->row_array();
+
+			// Check to see if anything was returned, and if so continue
+			if(sizeof($thisPage)) {
+				$thisTemplate = $thisPage['templateName'];
+
+				// Step 2 - Now lets get the template view filename from the templates table
+				$thisPage = $this->db->get_where('templates', array('templateName' => $thisTemplate));
 				$thisPage = $thisPage->row_array();
-				if(sizeof($thisPage)) {
-					$thisTemplate = $thisPage['templateName'];
+				$thisView = $thisPage['userView'];
 
-					echo '<br />Page is using template: ' . $thisTemplate;
+				// Step 3 - Get the associated page data from the database
+				$pageData = $this->db->get_where($thisTemplate, array('pageName' => $requestPage));
+				$data['pageData'] = $pageData->row_array();
 
-					// Now lets get the template view filename from the templates table
-					$thisPage = $this->db->get_where('templates', array('templateName' => $thisTemplate));
-					$thisPage = $thisPage->row_array();
-
-					$thisView = $thisPage['userView'];
-
-					$data['templateName'] = $thisTemplate;
-
-					$this->load->view('templates/' . $thisTemplate . '/' . $thisView, $data);
-				} else {
-					redirect('');
-				}
+				// Step 4 - Load the view, passing the $data variable
+				$data['templateName'] = $thisTemplate;
+				$this->load->view('templates/' . $thisTemplate . '/' . $thisView, $data);
 			} else {
-				// No page provided, so we just load the index page
-				echo 'Loading index';
+				redirect('');
 			}
 		} else {
 			echo "Server misconfiguration: Invalid index definition";

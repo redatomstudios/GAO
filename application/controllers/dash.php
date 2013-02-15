@@ -54,8 +54,8 @@ class Dash extends CI_Controller {
 					$data['cmsView'] = $d['filename'];
 
 
-					$data['templateName'] = $post['templateName'];
-					$data['tableName'] = $templateName;
+					$data['templateName'] = strtolower($post['templateName']);
+					$data['tableName'] = strtolower($templateName);
 					$fields = array();
 					for($i=0; $i<sizeof($post['fieldName']);$i++){
 						if($post['fieldName'][$i] != '')

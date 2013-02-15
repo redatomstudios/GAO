@@ -16,7 +16,7 @@
 	</head>
 	<body>
 		<header>
-			<img src="images/headerLogo.png" id="headerLogo" />
+			<img src="resources/images/<?= $templateName ?>/headerLogo.png" id="headerLogo" />
 			<ul id="headerNav">
 				<li><a href="">Logout</a></li>
 				<li><a href="">Your Fundraiser</a></li>
@@ -26,9 +26,9 @@
 		<div id="pageWrap">
 			<div class="pageContent">
 				<ul class="liteSlide">
-					<li style="background-image: url('images/slide_2.jpg');"></li>
-					<li style="background-image: url('images/slide_1.jpg');"></li>
-					<li style="background-image: url('images/slide_3.jpg');"></li>
+					<li style="background-image: url('resources/images/<?= $templateName ?>/slide_2.jpg');"></li>
+					<li style="background-image: url('resources/images/<?= $templateName ?>/slide_1.jpg');"></li>
+					<li style="background-image: url('resources/images/<?= $templateName ?>/slide_3.jpg');"></li>
 				</ul>
 				<div class="fullModule">
 					<h2>Giving has never been so easy.</h2>
@@ -39,9 +39,9 @@
 						So if you have a great fundraising idea, why not join Give As One now, tell us what you plan to do and within 10 minutes you will have your own web space on the Give As One website that you can use to tell the world about your charity fundraising project. Your friends, family and colleagues will be able to donate to your chosen charity directly from your web space using their Paypal account of the debit / credit card. Give As One provide this service for free and the only deduction from donations will be the payment processing fees that are charged to us from Paypal.
 					</p>
 					<div class="gallery">
-						<img src="images/stock.jpg" />
-						<img src="images/wall.jpg" />
-						<img src="images/whale.jpg" />
+						<img src="resources/images/<?= $templateName ?>/stock.jpg" />
+						<img src="resources/images/<?= $templateName ?>/wall.jpg" />
+						<img src="resources/images/<?= $templateName ?>/whale.jpg" />
 					</div>
 					<p>
 						What you waiting for, click here to sign up now and get you fundraising project going

@@ -36,7 +36,9 @@ class Page extends CI_Controller {
 
 					$thisView = $thisPage['userView'];
 
-					$this->load->view($thisTemplate . '/' . $userView);
+					$data['templateName'] = $thisTemplate;
+
+					$this->load->view('templates/' . $thisTemplate . '/' . $thisView, $data);
 				} else {
 					redirect('');
 				}

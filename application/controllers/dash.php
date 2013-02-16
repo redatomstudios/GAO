@@ -45,6 +45,7 @@ class Dash extends CI_Controller {
 					$this->load->library('mylibrary');
 					$this->load->model('templatesModel');
 
+					$post['templateName'] = strtolower($post['templateName']);
 					$templateName = preg_replace('/[^a-zA-Z0-9]/', '_', $post['templateName']);
 
 
@@ -54,8 +55,8 @@ class Dash extends CI_Controller {
 					$data['cmsView'] = $d['filename'];
 
 
-					$data['templateName'] = strtolower($post['templateName']);
-					$data['tableName'] = strtolower($templateName);
+					$data['templateName'] = $post['templateName'];
+					$data['tableName'] = $templateName;
 					$fields = array();
 					for($i=0; $i<sizeof($post['fieldName']);$i++){
 						if($post['fieldName'][$i] != '')

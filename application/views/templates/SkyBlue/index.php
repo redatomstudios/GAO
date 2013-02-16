@@ -34,7 +34,7 @@
 						<?php
 							foreach($navItems as $thisNav) {
 						?>
-						<li><a href="<?= base_url() ?>/<?= $thisNav['pageName'] ?>"><?= $thisNav['pageTitle'] ?></a></li>
+						<li><a href="<?= base_url() ?><?= $thisNav['pageName'] ?>"><?= $thisNav['pageTitle'] ?></a></li>
 						<?php
 							}
 						?>
@@ -61,7 +61,7 @@
 					<?php
 					foreach($firstGroup as $thisNav) {
 					?>
-					<li><a href="<?= base_url() ?>/<?= $thisNav['pageName'] ?>"><?= $thisNav['pageTitle'] ?></a></li>
+					<li><a href="<?= base_url() ?><?= $thisNav['pageName'] ?>"><?= $thisNav['pageTitle'] ?></a></li>
 					<?php
 					}
 					?>
@@ -72,7 +72,7 @@
 					<?php
 					foreach($secondGroup as $thisNav) {
 					?>
-					<li><a href="<?= base_url() ?>/<?= $thisNav['pageName'] ?>"><?= $thisNav['pageTitle'] ?></a></li>
+					<li><a href="<?= base_url() ?><?= $thisNav['pageName'] ?>"><?= $thisNav['pageTitle'] ?></a></li>
 					<?php
 					}
 					?>

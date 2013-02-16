@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 16, 2013 at 09:19 PM
+-- Generation Time: Feb 16, 2013 at 09:46 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -55,14 +55,15 @@ CREATE TABLE IF NOT EXISTS `pages` (
   `templateName` varchar(100) NOT NULL,
   `navOrder` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `pages`
 --
 
 INSERT INTO `pages` (`id`, `pageName`, `pageTitle`, `pageGroup`, `templateName`, `navOrder`) VALUES
-(1, 'index', 'Home', 'Index', 'skyblue', 1);
+(1, 'index', 'Home', 'Index', 'skyblue', 1),
+(2, 'Home', 'Test Title', 'Home', 'SkyBlue', 1);
 
 -- --------------------------------------------------------
 
@@ -80,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `skyblue` (
   `pageContent` text,
   PRIMARY KEY (`id`),
   UNIQUE KEY `pageName` (`pageName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `skyblue`
@@ -88,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `skyblue` (
 
 INSERT INTO `skyblue` (`id`, `pageTitle`, `pageName`, `pageHeading`, `timestamp`, `pageContent`) VALUES
 (1, 'Home Page', 'index', 'Home Heading', '2013-02-12 19:35:40', 'gah =/'),
-(2, 'Test Title', 'Home', 'Home Heading', '2013-02-16 20:18:17', 'asd');
+(3, 'Test Title', 'Home', 'Home Heading', '2013-02-16 20:42:28', 'asd');
 
 -- --------------------------------------------------------
 

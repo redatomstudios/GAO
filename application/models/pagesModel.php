@@ -22,9 +22,20 @@ class PagesModel extends CI_Model{
 		# code...
 		$res = $this->db->get_where('templates', array('id' => $templateId));
 		$template = $res->row_array();
-		print_r($template);
+		// print_r($template);
 		$table = $template['tableName'];
+		$templateName = $template['templateName'];
 
+
+		$page['pageName '] = $post['pageName'];
+		$page['pageTitle'] = $post['pageTitle'];
+		$page['pageGroup'] = $post['pageGroup'];
+		$page['templateName'] = $templateName;
+		$page['navOrder'] = $post['navOrder'];
+
+		unset($post['pageGroup']);
+		unset($post['navOrder']);
+		$this->db->insert('pages', $page);
 		$this->db->insert($table, $post);
 	}
 }

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 12, 2013 at 08:56 PM
+-- Generation Time: Feb 16, 2013 at 09:19 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -29,6 +29,7 @@ USE `gao`;
 -- Table structure for table `fundcontrol`
 --
 
+DROP TABLE IF EXISTS `fundcontrol`;
 CREATE TABLE IF NOT EXISTS `fundcontrol` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -45,15 +46,23 @@ CREATE TABLE IF NOT EXISTS `fundcontrol` (
 -- Table structure for table `pages`
 --
 
+DROP TABLE IF EXISTS `pages`;
 CREATE TABLE IF NOT EXISTS `pages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `pageName` varchar(100) NOT NULL,
   `pageTitle` varchar(100) NOT NULL,
   `pageGroup` varchar(100) NOT NULL,
-  `pagePath` varchar(100) NOT NULL,
+  `templateName` varchar(100) NOT NULL,
   `navOrder` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `pages`
+--
+
+INSERT INTO `pages` (`id`, `pageName`, `pageTitle`, `pageGroup`, `templateName`, `navOrder`) VALUES
+(1, 'index', 'Home', 'Index', 'skyblue', 1);
 
 -- --------------------------------------------------------
 
@@ -61,23 +70,25 @@ CREATE TABLE IF NOT EXISTS `pages` (
 -- Table structure for table `skyblue`
 --
 
+DROP TABLE IF EXISTS `skyblue`;
 CREATE TABLE IF NOT EXISTS `skyblue` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `pageTitle` varchar(50) DEFAULT NULL,
   `pageName` varchar(50) NOT NULL,
   `pageHeading` varchar(50) DEFAULT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `pageContent` tinytext,
+  `pageContent` text,
   PRIMARY KEY (`id`),
   UNIQUE KEY `pageName` (`pageName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `skyblue`
 --
 
 INSERT INTO `skyblue` (`id`, `pageTitle`, `pageName`, `pageHeading`, `timestamp`, `pageContent`) VALUES
-(1, NULL, 'Home', 'Home Heading', '2013-02-12 19:35:40', 'asdasdasdasdaasdasdasd');
+(1, 'Home Page', 'index', 'Home Heading', '2013-02-12 19:35:40', 'gah =/'),
+(2, 'Test Title', 'Home', 'Home Heading', '2013-02-16 20:18:17', 'asd');
 
 -- --------------------------------------------------------
 
@@ -85,6 +96,7 @@ INSERT INTO `skyblue` (`id`, `pageTitle`, `pageName`, `pageHeading`, `timestamp`
 -- Table structure for table `templates`
 --
 
+DROP TABLE IF EXISTS `templates`;
 CREATE TABLE IF NOT EXISTS `templates` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `templateName` varchar(50) NOT NULL,
@@ -109,6 +121,7 @@ INSERT INTO `templates` (`id`, `templateName`, `userView`, `cmsView`, `tableName
 -- Table structure for table `usercontrol`
 --
 
+DROP TABLE IF EXISTS `usercontrol`;
 CREATE TABLE IF NOT EXISTS `usercontrol` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,

@@ -251,8 +251,7 @@ class Dash extends CI_Controller {
 			$this->load->view("templates/$templateFolder/" . $template['cmsView'], $data);
 			$this->load->view('dashboard/footer');
 		} else {
-			if($templateId) {
-				$post = $this->input->post();
+			if($post = $this->input->post()) {
 				$templateId = $post['templateId'];
 				unset($post['templateId']);
 

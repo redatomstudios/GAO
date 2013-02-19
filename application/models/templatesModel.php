@@ -39,7 +39,7 @@ class TemplatesModel extends CI_Model{
 				`timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, ';
 			foreach ($fields as $field) {
 				$query .= $field['fieldName'] . ' ' . $field['fieldType'] ;
-				$query .= ($field['fieldLength']!=''?'('.$field['fieldLength'].'), ':'(10), ');
+				$query .= ( $field['fieldLength'] != '' ? '('.$field['fieldLength'].'), ' : ( $field['fieldType'] == 'TEXT' ? '(1000), ' : '(10), ' ) );
 				if($field['fieldDefault']!=''){
 					$query = substr($query, 0, strlen($query)-2);
 					$query .= ' default \'' . $field['fieldDefault'].'\', ';
@@ -60,6 +60,10 @@ class TemplatesModel extends CI_Model{
 		echo "</br>" . $templateId . "   " . $templateTableName . "Removing" ;
 		$this->db->where('id', $templateId);
 		$this->db->delete('templates'); 
+
+		// Remove pages associated with this template from the PAGES table
+		$this->db->where('templateName', $templateTableName);
+		$this->db->delete('pages'); 
 
 		$this->db->query("drop table $templateTableName");
 	}

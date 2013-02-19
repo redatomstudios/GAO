@@ -6,15 +6,60 @@ class Dash extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('url');
+		$this->load->library('session');
+
+		$accessPath = $this->router->fetch_method();
+		if( !($accessPath == 'login' || $accessPath == 'logout') ) {
+			if(!$this->session->userdata('sessionID')) redirect('dash/logout');
+		}
 	}
 
 	public function index() {
+
 		$data['thisPage'] = 'dashboard';
 
 		$this->load->view('dashboard/header');
 		$this->load->view('dashboard/sidebar', $data);
 		$this->load->view('dashboard/home', $data);
 		$this->load->view('dashboard/footer');
+	}
+
+	public function login() {
+		$post = $this->input->post();
+		if(!$post) {
+			$this->load->view('auth');
+		} else {
+			$uname = $post['uName'];
+			$pword = $post['pWord'];
+			$authStatus = false;
+
+			$this->load->database();
+			$dbData = $this->db->get_where('usercontrol', array('username' => $uname));
+			$dbData = $dbData->row_array();
+
+			$salt = $dbData['salt'];
+			$accesscode = sha1($uname . $salt . $pword);
+
+			if($dbData['accesscode'] == $accesscode) {
+				$authStatus = true;
+			}
+
+			if($authStatus) {
+				$this->session->set_userdata(array(
+					'sessionID' => random_string('alnum', 16),
+					'username' => $uname
+				));
+
+				redirect('dash');
+			} else {
+				redirect('dash/login');
+			}
+		}
+	}
+
+	public function logout() {
+		$this->session->sess_destroy();
+		redirect('dash/login');
 	}
 
 	public function templates($templateID = 0, $tId = 0) {

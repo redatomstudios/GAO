@@ -38,4 +38,10 @@ function cycleSlides() {
 
 jQuery(document).ready(function() {
 	startSlider();
+
+	$('.formBlock').on('focus', '.element', function() {
+		$(this).parent().find('.elemHint').slideToggle();
+	}).on('blur', '.element', function() {
+		$(this).parent().find('.elemHint').slideToggle();
+	});
 });

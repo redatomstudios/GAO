@@ -33,3 +33,46 @@
 .pageContent a {
 	display: inline;
 }
+
+form {
+	display: table;
+	width: 80%;
+	margin: 0 auto;
+}
+
+form .formBlock {
+	display: table-row;
+}
+
+.formBlock .elemLabel, .formBlock .element {
+	display: table-cell;
+	vertical-align: middle;
+	height: 100%;
+}
+
+.formBlock .elemLabel {
+	padding: 20px;
+	width: 40%;
+}
+
+.elemLabel label {
+	font-weight: bold;
+}
+
+.elemHint {
+	display: none;
+}
+
+.element > * {
+	width: 80%;
+	padding: 10px;
+	font: inherit;
+}
+
+.element > textarea {
+	height: 100px;
+}
+
+.element > input[type="submit"] {
+	width: 326px;
+}

@@ -17,6 +17,10 @@ class Dash extends CI_Controller {
 		$this->load->view('dashboard/footer');
 	}
 
+	public function login() {
+		$this->load->view('auth');
+	}
+
 	public function templates($templateID = 0, $tId = 0) {
 		$this->load->model('templatesModel');
 

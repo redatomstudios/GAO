@@ -61,6 +61,7 @@ class TemplatesModel extends CI_Model{
 		$this->db->where('id', $templateId);
 		$this->db->delete('templates'); 
 
+		// Remove pages associated with this template from the PAGES table
 		$this->db->where('templateName', $templateTableName);
 		$this->db->delete('pages'); 
 

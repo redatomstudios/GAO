@@ -23,26 +23,26 @@
 
 	input {
 		padding: 10px;
-	}
-
-	input[type="text"], input[type="password"] {
 		width: 200px;
+		float: right;
+		border-radius: 5px;
+		border-width: 1px;
+		outline: none;
 	}
 
 	input[type="submit"] {
 		width: 100px;
-		float: right;
 	}
 	</style>
 </head>
 <body>
 	<div class="logWrap">
 		<div class="tCell">
-			<form>
-				<input type="text" placeholder="Username" />
-				<input type="password" placeholder="Password" />
+			<?= form_open('dash/login') ?>
+				<input name="uName" type="text" placeholder="Username" />
+				<input name="pWord" type="password" placeholder="Password" />
 				<input type="submit" />
-			</form>
+			<?= form_close() ?>
 		</div>
 		<div class="tCell">
 			<img src="<?= base_url() ?>resources/branding/headerLogo.png" width="200" />

@@ -17,6 +17,10 @@
 	padding: 0 30px;
 }
 
+.sidebar > nav li.spacer {
+	height: 20px;
+}
+
 .sidebar > nav li:first-child {
 	border: none;
 }

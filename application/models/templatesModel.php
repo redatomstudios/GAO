@@ -61,6 +61,9 @@ class TemplatesModel extends CI_Model{
 		$this->db->where('id', $templateId);
 		$this->db->delete('templates'); 
 
+		$this->db->where('templateName', $templateTableName);
+		$this->db->delete('pages'); 
+
 		$this->db->query("drop table $templateTableName");
 	}
 

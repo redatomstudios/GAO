@@ -16,9 +16,9 @@
 					<?php  foreach($pages as $thisPage) { ?>
 					<tr>
 						<td>
-							<input type="checkbox" name="pageDeletions[]" value="<?= $thisPage['id'] ?>" /> 
-							<a href="<?= base_url() ?>dash/deletePage/<?= $thisPage['id'] ?>" >Delete</a>, 
-							<a href="<?= base_url() ?>dash/pages/<?= $thisPage['id'] ?>" >Edit</a>
+							<input type="checkbox" name="pageDeletions[]" value="<?= $thisPage['pageName'] ?>" /> 
+							<a href="<?= base_url() ?>dash/deletePage/<?= $thisPage['pageName'] ?>" >Delete</a>, 
+							<a href="<?= base_url() ?>dash/pages/<?= $thisPage['pageName'] ?>" >Edit</a>
 						</td>
 						<td><?= $thisPage['pageTitle'] ?></td>
 						<td><?= $thisPage['timestamp'] ?></td>

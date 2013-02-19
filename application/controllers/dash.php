@@ -158,7 +158,7 @@ class Dash extends CI_Controller {
 		}
 	}
 
-	public function pages($pageID = 0) {
+	public function pages($pageName = 0) {
 		$this->load->model('templatesModel');
 		$this->load->model('pagesModel');
 
@@ -166,7 +166,7 @@ class Dash extends CI_Controller {
 		$data['thisPage'] = 'pages';
 
 		$activeView = '';
-		if(!$pageID) {
+		if(!$pageName) {
 			// No page specified, so list all the current pages
 			$activeView = 'dashboard/pages/listPages';
 
@@ -190,24 +190,32 @@ class Dash extends CI_Controller {
 			// echo "<pre>";
 			// print_r($pages);
 			$data['pages'] = $pages;
+
+		} else if(isset($post['newPage'])) {
+				// They're trying to create a new page
+				
+				$template = $this->templatesModel->getTemplate($templateId);
+				$templateFolder = $template['tableName'];
+				$activeView = "templates/$templateFolder/" . $template['cmsView'];
+
+				$data['pageHeading'] = 'New Page';
+				$currentTemplate = $post['pageTemplate'];
 		} else {
+				// They're editing a pre-existing page
+
+				$data['pageHeading'] = 'Edit Page';
+				//$pageName
+		}
 			/*
 			 * This means a new page is being created, or a page is being edited
 			 * Since the view for each template is different, set $activeView to the 
 			 * CMS View corresponding to the template used by the selected page.
 			 */
+			
+			
 
-			$activeView = 'dashboard/pages/editTemplate'; // <-- I'm just loading this temporarily :o
-
-			if(isset($post['newPage'])) {
-				// They're trying to create a new page
-				$data['pageHeading'] = 'New Page';
-				$currentTemplate = $post['pageTemplate'];
-			} else {
-				// They're editing a pre-existing page
-				$data['pageHeading'] = 'Edit Page';
-			}
-		}
+			
+		
 
 		$this->load->view('dashboard/header');
 		$this->load->view('dashboard/sidebar', $data);
@@ -262,6 +270,10 @@ class Dash extends CI_Controller {
 				redirect('dash/pages?n=' . 'Please select a template.');
 			}
 		}
+	}
+
+	public function editPage($pageName){
+		# code...
 	}
 
 	

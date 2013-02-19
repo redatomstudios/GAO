@@ -38,4 +38,23 @@ class PagesModel extends CI_Model{
 		$this->db->insert('pages', $page);
 		$this->db->insert($table, $post);
 	}
+
+	public function getPage($pageName){
+		# code...
+		$res = $this->db->get_where('pages', array('pageName' => $pageName));
+		if($res->num_rows > 0){
+			$res = $this->row_array();
+			$templateName = $res['templateName'];
+			$this->db->select('tableName');
+			$res = $this->db->get_where('templates', array('templateName' => $templateName));
+			if($res->num_rows() >0){
+				$res = $res->row_array();
+				$table = $res['tableName'];
+				$res = $this->db->get_where($table, array('pageName' => $pageName));
+				if($res->num_rows() > 0)
+					return $res->row_array();
+			}
+		}
+		return FALSE;
+	}
 }

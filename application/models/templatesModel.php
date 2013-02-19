@@ -64,4 +64,6 @@ class TemplatesModel extends CI_Model{
 		$this->db->query("drop table $templateTableName");
 	}
 
+	
+
 }

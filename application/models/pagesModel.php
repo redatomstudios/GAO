@@ -43,16 +43,28 @@ class PagesModel extends CI_Model{
 		# code...
 		$res = $this->db->get_where('pages', array('pageName' => $pageName));
 		if($res->num_rows > 0){
-			$res = $this->row_array();
+			$res = $res->row_array();
+			$pageGroup = $res['pageGroup'];
+			$navOrder = $res['navOrder'];
 			$templateName = $res['templateName'];
-			$this->db->select('tableName');
+			$this->db->select('id, tableName, cmsView');
 			$res = $this->db->get_where('templates', array('templateName' => $templateName));
 			if($res->num_rows() >0){
 				$res = $res->row_array();
+				$cms = $res['cmsView'];
+				$templateId = $res['id'];
 				$table = $res['tableName'];
 				$res = $this->db->get_where($table, array('pageName' => $pageName));
-				if($res->num_rows() > 0)
-					return $res->row_array();
+				if($res->num_rows() > 0){
+					$res = $res->row_array();
+					$res['templateName'] = $templateName;
+					$res['cmsView'] = $cms;
+					$res['templateId'] = $templateId;
+					$res['pageGroup'] = $pageGroup;
+					$res['navOrder'] = $navOrder;
+					
+					return $res;
+				}
 			}
 		}
 		return FALSE;

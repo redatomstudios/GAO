@@ -10,7 +10,7 @@
 							<label for="pageName">Page Name:</label>
 						</td>
 						<td>
-							<input type="text" name="pageName" id="pageName" placeholder="Name that shows up in the title bar" />
+							<input type="text" name="pageName" id="pageName" <?= (isset($pageName)?"value=\"$pageName\"":"placeholder=\"Name that shows up in the title bar\"") ?> />
 						</td>
 						<td>
 
@@ -21,7 +21,7 @@
 							<label for="pageHeading">Page Heading:</label>
 						</td>
 						<td>
-							<input type="text" name="pageHeading" id="pageHeading" placeholder="Heading that shows up on the page" />
+							<input type="text" name="pageHeading" id="pageHeading" <?= (isset($pageHeading)?"value=\"$pageHeading\"":"placeholder=\"Heading that shows up on the page\"") ?> />
 						</td>
 						<td>
 							
@@ -32,7 +32,7 @@
 							<label for="pageTitle">Page Title:</label>
 						</td>
 						<td>
-							<input type="text" name="pageTitle" id="pageTitle" placeholder="Title that is prepended in the tab/window" />
+							<input type="text" name="pageTitle" id="pageTitle" <?= (isset($pageTitle)?"value=\"$pageTitle\"":"placeholder=\"Title that is prepended in the tab/window\"") ?> />
 						</td>
 						<td>
 							
@@ -43,7 +43,7 @@
 							<label for="pageGroup">Page Group:</label>
 						</td>
 						<td>
-							<input type="text" name="pageGroup" id="pageGroup" placeholder="Navigation group, usually the same as the Page Name" />
+							<input type="text" name="pageGroup" id="pageGroup" <?= (isset($pageGroup)?"value=\"$pageGroup\"":"placeholder=\"Navigation group, usually the same as the Page Name\"") ?> />
 						</td>
 						<td>
 							
@@ -54,7 +54,7 @@
 							<label for="navOrder">Navigation Order:</label>
 						</td>
 						<td>
-							<input type="text" name="navOrder" id="navOrder" placeholder="Navigation order, 1 is at the top. Use 0 to exclude from the navigation." />
+							<input type="text" name="navOrder" id="navOrder" <?= (isset($navOrder)?"value=\"$navOrder\"":"placeholder=\"Navigation order, 1 is at the top. Use 0 to exclude from the navigation.\"") ?> />
 						</td>
 						<td>
 							
@@ -68,7 +68,7 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<textarea name="pageContent" id="pageContent" placeholder="Enter webpage HTML content here"></textarea>
+							<textarea name="pageContent" id="pageContent" <?php if(!isset($pageContent)) echo "placeholder=\"Enter webpage HTML content here\""; ?>> <?php if(isset($pageContent)) echo $pageContent; ?> </textarea>
 						</td>
 						<td></td>
 					</tr>

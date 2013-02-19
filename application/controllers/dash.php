@@ -204,6 +204,17 @@ class Dash extends CI_Controller {
 				// They're editing a pre-existing page
 
 				$data['pageHeading'] = 'Edit Page';
+				$res = $this->pagesModel->getPage($pageName);
+				// echo "<pre>";
+				// print_r($res);
+				$activeView = "templates/" . $res['templateName'] . "/" . $res['cmsView'];
+				$data['templateId'] = $res['templateId'];
+				$data['pageName'] = $res['pageName'];
+				$data['pageHeading'] = $res['pageHeading'];
+				$data['pageTitle'] = $res['pageTitle'];
+				$data['pageGroup'] = $res['pageGroup'];
+				$data['navOrder'] = $res['navOrder'];
+				$data['pageContent'] = $res['pageContent'];
 				//$pageName
 		}
 			/*

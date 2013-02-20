@@ -154,9 +154,9 @@ class Dash extends CI_Controller {
 					redirect('/dash/templates');
 				}
 
-			}elseif($templateID == 'delete'){
+			} elseif ($templateID == 'delete') {
 				$view = 0;
-				echo "<pre>";
+				//echo "<pre>";
 				$this->load->library('mylibrary');
 				if($post = $this->input->post()){
 					// print_r($post['templateDeletions']);

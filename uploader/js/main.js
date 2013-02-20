@@ -12,7 +12,7 @@
 /*jslint nomen: true, unparam: true, regexp: true */
 /*global $, window, document */
 
-var baseUrl = '/GAO/';
+var baseUrl = '/';
 
 $(function () {
     'use strict';

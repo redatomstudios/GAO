@@ -69,4 +69,27 @@ class PagesModel extends CI_Model{
 		}
 		return FALSE;
 	}
+
+	public function editPage($post){
+		# code...
+		$pageName = $post['pageName'];
+		$page['pageTitle'] = $post['pageTitle'];
+		$page['pageGroup'] = $post['pageGroup'];
+		$page['navOrder'] = $post['navOrder'];
+
+		$templateId = $post['templateId'];
+		$template['pageTitle'] = $post['pageTitle'];
+		$template['pageHeading'] = $post['pageHeading'];
+		$template['pageContent'] = $post['pageContent'];
+
+		$this->db->where('pageName', $pageName);
+		$this->db->update('pages', $page);
+
+		$this->db->select('tableName');
+		$res = $this->db->get_where('templates', array('id'=>$templateId))->row_array();
+		$table = $res['tableName'];
+
+		$this->db->where('pageName', $pageName);
+		$this->db->update($table, $template);
+	}
 }

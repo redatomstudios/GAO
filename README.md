@@ -1,1 +1,1 @@
-Move 'Add Field' button just below all the fields
+While Editing a page, page name should be uneditable, since it is the primary key

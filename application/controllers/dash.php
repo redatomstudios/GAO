@@ -237,17 +237,28 @@ class Dash extends CI_Controller {
 			$data['pages'] = $pages;
 
 		} else if(isset($post['newPage'])) {
-				// They're trying to create a new page
-				
-				$template = $this->templatesModel->getTemplate($templateId);
-				$templateFolder = $template['tableName'];
-				$activeView = "templates/$templateFolder/" . $template['cmsView'];
+			// They're trying to create a new page
+			
+			$template = $this->templatesModel->getTemplate($templateId);
+			$templateFolder = $template['tableName'];
+			$activeView = "templates/$templateFolder/" . $template['cmsView'];
 
-				$data['pageHeading'] = 'New Page';
-				$currentTemplate = $post['pageTemplate'];
+			$data['pageHeading'] = 'New Page';
+			$currentTemplate = $post['pageTemplate'];
 		} else {
 				// They're editing a pre-existing page
+			if(isset($post['templateId'])){
+				//Edit page is posted
+				$templateId = $post['templateId'];
+				//title, group, navOrder
 
+				
+
+				$this->pagesModel->editPage($post);
+				redirect('/dash/pages');
+			}
+			else{
+				// Displaying edit page
 				$data['pageHeading'] = 'Edit Page';
 				$res = $this->pagesModel->getPage($pageName);
 				// echo "<pre>";
@@ -260,6 +271,7 @@ class Dash extends CI_Controller {
 				$data['pageGroup'] = $res['pageGroup'];
 				$data['navOrder'] = $res['navOrder'];
 				$data['pageContent'] = $res['pageContent'];
+			}
 				//$pageName
 		}
 			/*
@@ -278,6 +290,7 @@ class Dash extends CI_Controller {
 		$this->load->view($activeView, $data);
 		$this->load->view('dashboard/footer');
 	}
+
 
 	public function newPageCMS(){
 		# code...

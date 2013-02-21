@@ -1,0 +1,78 @@
+/* Content styles */
+
+.pageContent {
+	width: 785px;
+	float: right;
+	font: 0.875em "Roboto Condensed", Arial, Verdana, sans-serif;
+	font-weight: 300;
+	color: #1396B6;
+	color: #000;
+	font-size: 1em;
+	line-height: 1.3em;
+	letter-spacing: 1px;
+}
+
+.pageContent p, .pageContent li {
+	margin: 0 10px 20px;
+}
+
+.pageContent li {
+	list-style-type: disc;
+}
+
+.gallery {
+	margin: 10px;
+	text-align: center;
+}
+
+.gallery img {
+	margin: 20px;
+	height: 130px;
+}
+
+.pageContent a {
+	display: inline;
+}
+
+form {
+	display: table;
+	width: 80%;
+	margin: 0 auto;
+}
+
+form .formBlock {
+	display: table-row;
+}
+
+.formBlock .elemLabel, .formBlock .element {
+	display: table-cell;
+	vertical-align: middle;
+	height: 100%;
+}
+
+.formBlock .elemLabel {
+	padding: 20px;
+	width: 40%;
+}
+
+.elemLabel label {
+	font-weight: bold;
+}
+
+.elemHint {
+	display: none;
+}
+
+.element > * {
+	width: 80%;
+	padding: 10px;
+	font: inherit;
+}
+
+.element > textarea {
+	height: 100px;
+}
+
+.element > input[type="submit"] {
+	width: 326px;
+}

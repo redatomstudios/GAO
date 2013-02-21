@@ -1,7 +1,7 @@
 footer {
 	clear: both;
-	padding: 139px 0 90px;
-	background: url('../images/footerSpan.jpg') center top no-repeat;
+	padding: 240px 0 90px;
+	background: url('resources/images/skyblue/footerSpan.jpg') center 100px no-repeat;
 	font: 1.2em "Roboto Condensed", Arial, Verdana, sans-serif;
 	font-weight: 300;
 	width: 900px;

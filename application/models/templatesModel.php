@@ -57,7 +57,7 @@ class TemplatesModel extends CI_Model{
 
 	public function deleteTemplate($templateId, $templateTableName){
 		# code...
-		echo "</br>" . $templateId . "   " . $templateTableName . "Removing" ;
+		//echo "</br>" . $templateId . "   " . $templateTableName . "Removing" ;
 		$this->db->where('id', $templateId);
 		$this->db->delete('templates'); 
 

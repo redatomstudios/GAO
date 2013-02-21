@@ -121,7 +121,7 @@ class Dash extends CI_Controller {
 					$idDir = $_SERVER['DOCUMENT_ROOT'] . base_url(). 'uploader/server/php/files/' . $identifier;
 					if($handle = opendir($idDir)){
 
-						$dir = $_SERVER['DOCUMENT_ROOT'] . base_url(). 'Resources/';
+						$dir = $_SERVER['DOCUMENT_ROOT'] . base_url(). 'resources/';
 						if(!is_dir($dir . 'js/' . $templateName))
                    			mkdir($dir . 'js/' . $templateName);
                    		if(!is_dir($dir . 'css/' . $templateName))
@@ -172,12 +172,12 @@ class Dash extends CI_Controller {
 					$this->templatesModel->deleteTemplate($t['id'], $t['tableName']);
 
 
-					if(is_dir($_SERVER['DOCUMENT_ROOT'] . base_url() . "Resources/css/" . $t['tableName']))
-						$this->mylibrary->deleteDirectory($_SERVER['DOCUMENT_ROOT'] . base_url() . "Resources/css/" . $t['tableName']);
-					if(is_dir($_SERVER['DOCUMENT_ROOT'] . base_url() . "Resources/js/" . $t['tableName']))
-						$this->mylibrary->deleteDirectory($_SERVER['DOCUMENT_ROOT'] . base_url() . "Resources/js/" . $t['tableName']);
-					if(is_dir($_SERVER['DOCUMENT_ROOT'] . base_url() . "Resources/images/" . $t['tableName']))
-						$this->mylibrary->deleteDirectory($_SERVER['DOCUMENT_ROOT'] . base_url() . "Resources/images/" . $t['tableName']);
+					if(is_dir($_SERVER['DOCUMENT_ROOT'] . base_url() . "resources/css/" . $t['tableName']))
+						$this->mylibrary->deleteDirectory($_SERVER['DOCUMENT_ROOT'] . base_url() . "resources/css/" . $t['tableName']);
+					if(is_dir($_SERVER['DOCUMENT_ROOT'] . base_url() . "resources/js/" . $t['tableName']))
+						$this->mylibrary->deleteDirectory($_SERVER['DOCUMENT_ROOT'] . base_url() . "resources/js/" . $t['tableName']);
+					if(is_dir($_SERVER['DOCUMENT_ROOT'] . base_url() . "resources/images/" . $t['tableName']))
+						$this->mylibrary->deleteDirectory($_SERVER['DOCUMENT_ROOT'] . base_url() . "resources/images/" . $t['tableName']);
 
 
 					$this->mylibrary->deleteDirectory($_SERVER['DOCUMENT_ROOT'] . base_url(). 'application/views/templates/' . $t['tableName']);
@@ -291,7 +291,7 @@ class Dash extends CI_Controller {
 			$templateFolder = $template['tableName'];
 			$data['templateId'] = $templateId;
 			$data['css'] = '';
-			$idDir = $_SERVER['DOCUMENT_ROOT'] . base_url(). 'Resources';
+			$idDir = $_SERVER['DOCUMENT_ROOT'] . base_url(). 'resources';
 			if($handle = opendir("$idDir/css/$templateFolder")){
 				while (false !== ($entry = readdir($handle))) {
 					if ($entry != "." && $entry != "..") {

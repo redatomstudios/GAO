@@ -57,7 +57,12 @@ class Page extends CI_Controller {
 				$pageData = $this->db->get_where($thisTemplate, array('pageName' => $requestPage));
 				$data['pageData'] = $pageData->row_array();
 
-				// Step 3.1 - Get the navigation items
+				// Step 3.1 - use html_entity_decode to return to proper display formatting
+				foreach($data['pageData'] as $i => $field) {
+					$data['pageData'][$i] = html_entity_decode($data['pageData'][$i]);
+				}
+
+				// Step 3.2 - Get the navigation items
 				$data['navItems'] = $this->createNav();
 
 				// Step 4 - Load the view, passing the $data variable

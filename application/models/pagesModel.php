@@ -26,6 +26,9 @@ class PagesModel extends CI_Model{
 		$table = $template['tableName'];
 		$templateName = $template['templateName'];
 
+		foreach($post as $i => $field) {
+			$post[$i] = htmlentities($post[$i]);
+		}
 
 		$page['pageName '] = $post['pageName'];
 		$page['pageTitle'] = $post['pageTitle'];
@@ -72,6 +75,10 @@ class PagesModel extends CI_Model{
 
 	public function editPage($post){
 		# code...
+		foreach($post as $i => $field) {
+			$post[$i] = htmlentities($post[$i]);
+		}
+		
 		$pageName = $post['pageName'];
 		$page['pageTitle'] = $post['pageTitle'];
 		$page['pageGroup'] = $post['pageGroup'];

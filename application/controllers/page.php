@@ -7,6 +7,7 @@ class Page extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->database();
+		$this->load->library('mylibrary');
 	}
 
 	public function index($requestPage = '') {
@@ -67,6 +68,9 @@ class Page extends CI_Controller {
 
 				// Step 4 - Load the view, passing the $data variable
 				$data['templateName'] = $thisTemplate;
+
+				// Prints out all countries, we need to use this to create the countries dropdown...
+				//print_r($this->mylibrary->getCountries());
 				$this->load->view('templates/' . $thisTemplate . '/' . $thisView, $data);
 			} else {
 				redirect('');

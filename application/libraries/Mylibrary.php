@@ -66,5 +66,15 @@ class Mylibrary {
        } 
      } 
 
+     public function getCountries() {
+        $CI =& get_instance();
+        $CI->load->database();
+
+        $CI->db->order_by('name', 'asc');
+        $countries = $CI->db->get('countries');
+        $countries = $countries->result_array();
+
+        return $countries;
+     }
 
 }

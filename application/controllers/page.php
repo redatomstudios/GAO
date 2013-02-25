@@ -80,6 +80,19 @@ class Page extends CI_Controller {
 		}
 	}
 
+	public function contactus(){
+	/*
+	* Process the contact us page and send the Email to the client
+	*/
+		# code...
+		$post = $this->input->post();
+		echo "Bleee<pre>";
+
+		print_r($post);
+
+
+	}
+
 
 	private function createNav() {
 	/*

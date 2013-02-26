@@ -11,13 +11,13 @@ class Page extends CI_Controller {
 	}
 
 	public function index($requestPage = '') {
-/*
- * This will load the page which has the name 'index'
- * The 'index' page is the only page with a required name
- * and it serves as the entry point into the website
- * If a $requestPage is specified, then it loads that page
- * instead.
- */
+		/*
+		 * This will load the page which has the name 'index'
+		 * The 'index' page is the only page with a required name
+		 * and it serves as the entry point into the website
+		 * If a $requestPage is specified, then it loads that page
+		 * instead.
+		 */
 		$basePath = '';
 		$root = $this->db->get_where('pages', array('pageName' => 'index'));
 		$root = $root->row_array();
@@ -28,19 +28,19 @@ class Page extends CI_Controller {
 	 */
 		if($root) {
 
-		/* 
-		 * If no page was specified, we load the index by default.
-		 */
+	/* 
+	 * If no page was specified, we load the index by default.
+	 */
 			if(!$requestPage) $requestPage = 'index';
 				
-		/*
-		 * Loading a page consists of the following steps:
-		 *   - Get the template used by the page
-		 *   - load the associated filenames from the template table
-		 *   - load the data from the database and store into the $data variable
-		 *     with the same name as each database field name
-		 *   - Load view, passing the $data variable
-		 */
+	/*
+	 * Loading a page consists of the following steps:
+	 *   - Get the template used by the page
+	 *   - load the associated filenames from the template table
+	 *   - load the data from the database and store into the $data variable
+	 *     with the same name as each database field name
+	 *   - Load view, passing the $data variable
+	 */
 			// Step 1 - Get the template used by the page
 			$thisPage = $this->db->get_where('pages', array('pageName' => $requestPage));
 			$thisPage = $thisPage->row_array();
@@ -85,11 +85,41 @@ class Page extends CI_Controller {
 	* Process the contact us page and send the Email to the client
 	*/
 		# code...
-		$post = $this->input->post();
-		echo "Bleee<pre>";
 
-		print_r($post);
+		if($post = $this->input->post()){
+			$word = $post['captcha'];
+			$ip = $this->input->ip_address();
+			$this->loginModel->deleteCaptchas();
+			if($this->loginModel->checkCaptcha($word, $ip))
+				echo "Corrent Captcha"
 
+			else
+				echo "Incorrect Captcha";
+		}
+		else{
+			$this->load->helper('captcha');
+			$this->load->helper('string');
+			
+
+			$vals = array(
+					'word'		 => random_string('alpha', 6),
+	                'img_path'	 => './captcha/',
+	                'img_url'	 => base_url().'captcha/',
+	                'font_path'  => './system/fonts/arial.ttf',
+	                'size'  => '20',
+	                'img_width'	 => '270',
+	                'img_height' => '50',
+	                'border' => 1, 
+	                'expiration' => 7200
+	                );
+
+			$cap = create_captcha($vals);
+			$cap['ip'] = $this->input->ip_address();
+			$this->loginModel->insertCaptcha($cap);
+
+			$data['cap'] = $cap['image'];
+			$this->load->view('template\SkyBlue\contactus',$data); //Make this dynamic
+		}
 
 	}
 

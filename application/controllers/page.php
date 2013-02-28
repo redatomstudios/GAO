@@ -86,12 +86,14 @@ class Page extends CI_Controller {
 	*/
 		# code...
 
+	$this->load->model('pagesModel');
+
 		if($post = $this->input->post()){
 			$word = $post['captcha'];
 			$ip = $this->input->ip_address();
-			$this->loginModel->deleteCaptchas();
-			if($this->loginModel->checkCaptcha($word, $ip))
-				echo "Corrent Captcha"
+			$this->pagesModel->deleteCaptchas();
+			if($this->pagesModel->checkCaptcha($word, $ip))
+				echo "Correct Captcha";
 
 			else
 				echo "Incorrect Captcha";
@@ -115,10 +117,10 @@ class Page extends CI_Controller {
 
 			$cap = create_captcha($vals);
 			$cap['ip'] = $this->input->ip_address();
-			$this->loginModel->insertCaptcha($cap);
+			$this->pagesModel->insertCaptcha($cap);
 
 			$data['cap'] = $cap['image'];
-			$this->load->view('template\SkyBlue\contactus',$data); //Make this dynamic
+			$this->load->view('templates\SkyBlue\contactus',$data); //Make this dynamic
 		}
 
 	}

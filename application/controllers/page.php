@@ -90,11 +90,11 @@ class Page extends CI_Controller {
 			$word = $post['captcha'];
 			$ip = $this->input->ip_address();
 			$this->loginModel->deleteCaptchas();
-			if($this->loginModel->checkCaptcha($word, $ip))
-				echo "Corrent Captcha"
-
-			else
+			if($this->loginModel->checkCaptcha($word, $ip)) {
+				echo "Corrent Captcha";
+			} else {
 				echo "Incorrect Captcha";
+			}
 		}
 		else{
 			$this->load->helper('captcha');

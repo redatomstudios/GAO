@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2013 at 01:05 AM
+-- Generation Time: Mar 17, 2013 at 02:06 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -34,7 +34,17 @@ CREATE TABLE IF NOT EXISTS `captcha` (
   `word` varchar(20) NOT NULL,
   PRIMARY KEY (`captcha_id`),
   KEY `word` (`word`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=129 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=133 ;
+
+--
+-- Dumping data for table `captcha`
+--
+
+INSERT INTO `captcha` (`captcha_id`, `captcha_time`, `ip_address`, `word`) VALUES
+(129, 1362046201, '::1', 'HpTQUK'),
+(130, 1362046221, '::1', 'OcnfVg'),
+(131, 1362046253, '::1', 'YUEIEm'),
+(132, 1363525194, '::1', 'CBAmlG');
 
 -- --------------------------------------------------------
 

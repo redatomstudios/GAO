@@ -59,8 +59,23 @@ class Page extends CI_Controller {
 				$data['pageData'] = $pageData->row_array();
 
 				// Step 3.1 - use html_entity_decode to return to proper display formatting
+				// $data['pageData'][$i] = html_entity_decode($data['pageData'][$i]);
+				
+				function replace($matches) {
+								
+					foreach ($matches as $match) {
+						$str = substr($match,3,strlen($match)-6);
+						$ret = include "./plugins/".$str.'.php';
+						// echo base_url("plugins/".$str.'.php');
+
+					}
+					return $ret;
+				}
+
 				foreach($data['pageData'] as $i => $field) {
-					$data['pageData'][$i] = html_entity_decode($data['pageData'][$i]);
+					$decodedHtml = html_entity_decode($data['pageData'][$i]);
+					$data['pageData'][$i] = preg_replace_callback('/\{\{\{[a-zA-Z 0-9_]*\}\}\}/', 'replace', $decodedHtml);
+					
 				}
 
 				// Step 3.2 - Get the navigation items
@@ -86,8 +101,8 @@ class Page extends CI_Controller {
 	*/
 		# code...
 
-	$this->load->model('pagesModel');
-	$this->load->model('captchaModel');
+		$this->load->model('pagesModel');
+		$this->load->model('captchaModel');
 
 		if($post = $this->input->post()){
 			$word = $post['captcha'];

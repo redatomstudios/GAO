@@ -1,7 +1,7 @@
 <?php
 
 
-class TestModel extends CI_Model{
+class UsercontrolModel extends CI_Model{
 
 	public function createUser($data){
 

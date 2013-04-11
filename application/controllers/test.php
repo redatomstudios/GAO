@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Test extends CI_Controller {
+class User extends CI_Controller {
 
 	public function __construct(){
 		# code...
@@ -68,7 +68,7 @@ class Test extends CI_Controller {
 		* 1. Select a template
 		* 2. Get view fields from the table name
 		* 3. Show views as checkboxes
-		* 
+		*
 		*/
 	}
 

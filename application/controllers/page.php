@@ -22,17 +22,16 @@ class Page extends CI_Controller {
 		$root = $this->db->get_where('pages', array('pageName' => 'index'));
 		$root = $root->row_array();
 
-	/* 
+	/*
 	 * Here we get the index and check to see if it exists.
 	 * The index is required, so don't proceed without it.
 	 */
 		if($root) {
 
-	/* 
+	/*
 	 * If no page was specified, we load the index by default.
 	 */
 			if(!$requestPage) $requestPage = 'index';
-				
 	/*
 	 * Loading a page consists of the following steps:
 	 *   - Get the template used by the page
@@ -60,9 +59,7 @@ class Page extends CI_Controller {
 
 				// Step 3.1 - use html_entity_decode to return to proper display formatting
 				// $data['pageData'][$i] = html_entity_decode($data['pageData'][$i]);
-				
 				function replace($matches) {
-								
 					foreach ($matches as $match) {
 						$str = substr($match,3,strlen($match)-6);
 						$ret = include "./plugins/".$str.'.php';
@@ -75,7 +72,6 @@ class Page extends CI_Controller {
 				foreach($data['pageData'] as $i => $field) {
 					$decodedHtml = html_entity_decode($data['pageData'][$i]);
 					$data['pageData'][$i] = preg_replace_callback('/\{\{\{[a-zA-Z 0-9_]*\}\}\}/', 'replace', $decodedHtml);
-					
 				}
 
 				// Step 3.2 - Get the navigation items
@@ -114,33 +110,28 @@ class Page extends CI_Controller {
 				echo "Incorrect Captcha";
 			}
 		}
-		else{
-			$this->load->helper('captcha');
-			$this->load->helper('string');
-			
-
-			$vals = array(
-					'word'		 => random_string('alpha', 6),
-	                'img_path'	 => './captcha/',
-	                'img_url'	 => base_url().'captcha/',
-	                'font_path'  => './system/fonts/arial.ttf',
-	                'size'  => '20',
-	                'img_width'	 => '270',
-	                'img_height' => '50',
-	                'border' => 1, 
-	                'expiration' => 7200
-	                );
-
-			$cap = create_captcha($vals);
-			$cap['ip'] = $this->input->ip_address();
-			$this->pagesModel->insertCaptcha($cap);
-
-			$data['cap'] = $cap['image'];
-			$this->load->view('templates\SkyBlue\contactus',$data); //Make this dynamic
-		}
 
 	}
 
+	public function register(){
+		$this->load->model('userModel');
+		$this->load->model('usercontrolModel');
+		$post = $this->input->post();
+		$user['username'] = $post['username'];
+		$user['passcode'] = $post['password'];
+		unset($post['confirmPassword']);
+		// unset($post['username']);
+		unset($post['confirmEmail']);
+		unset($post['charityName']);
+		unset($post['eventDescription']);
+		unset($post['captcha']);
+		unset($post['password']);
+		$this->userModel->addUser($post);
+		$this->usercontrolModel->createUser($user);
+
+		$message = 'Hi there,\n You have been registered!!!';
+		mail($post['email'], 'Registration @ GAO', $message);
+	}
 
 	private function createNav() {
 	/*
@@ -159,6 +150,7 @@ class Page extends CI_Controller {
 
 		return $navPages;
 	}
+
 
 }
 ?>

@@ -100,17 +100,7 @@ class PagesModel extends CI_Model{
 		$this->db->update($table, $template);
 	}
 
-	public function insertCaptcha($par){
-		# code...
-		$data = array(
-		    'captcha_time'	=> $par['time'],
-		    'ip_address'	=> $par['ip'],
-		    'word'	 => $par['word']
-		    );
 
-		$query = $this->db->insert_string('captcha', $data);
-		return $this->db->query($query);
-	}
 
 	public function deleteCaptchas(){
 		# code...

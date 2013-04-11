@@ -183,11 +183,11 @@ class Dash extends CI_Controller {
 					$this->mylibrary->deleteDirectory($_SERVER['DOCUMENT_ROOT'] . base_url(). 'application/views/templates/' . $t['tableName']);
 
 				}
-				
+
 				redirect('/dash/templates');
 
 			} else {
-				// This is an old template that's being edited, load from DB 
+				// This is an old template that's being edited, load from DB
 				if(!$post = $this->input->post()){
 					$data = $this->templatesModel->getTemplate($templateID);
 				}
@@ -238,7 +238,7 @@ class Dash extends CI_Controller {
 
 		} else if(isset($post['newPage'])) {
 			// They're trying to create a new page
-			
+
 			$template = $this->templatesModel->getTemplate($templateId);
 			$templateFolder = $template['tableName'];
 			$activeView = "templates/$templateFolder/" . $template['cmsView'];
@@ -252,7 +252,7 @@ class Dash extends CI_Controller {
 				$templateId = $post['templateId'];
 				//title, group, navOrder
 
-				
+
 
 				$this->pagesModel->editPage($post);
 				redirect('/dash/pages');
@@ -276,14 +276,14 @@ class Dash extends CI_Controller {
 		}
 			/*
 			 * This means a new page is being created, or a page is being edited
-			 * Since the view for each template is different, set $activeView to the 
+			 * Since the view for each template is different, set $activeView to the
 			 * CMS View corresponding to the template used by the selected page.
 			 */
-			
-			
 
-			
-		
+
+
+
+
 
 		$this->load->view('dashboard/header');
 		$this->load->view('dashboard/sidebar', $data);
@@ -341,11 +341,6 @@ class Dash extends CI_Controller {
 		}
 	}
 
-	public function editPage($pageName){
-		# code...
-	}
-
-	
 }
 
 ?>

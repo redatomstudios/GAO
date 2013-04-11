@@ -14,12 +14,12 @@ $vals = array(
         'size'  => '20',
         'img_width'	 => '270',
         'img_height' => '50',
-        'border' => 1, 
+        'border' => 1,
         'expiration' => 7200
         );
 
 $cap = create_captcha($vals);
-$cap['ip'] = $obj->input->ip_address(); 
+$cap['ip'] = $obj->input->ip_address();
 $obj->captchaModel->insertCaptcha($cap);
 
 return $cap['image'];

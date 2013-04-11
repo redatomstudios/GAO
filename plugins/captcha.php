@@ -4,10 +4,10 @@ $obj = new Page();
 $obj->load->helper('captcha');
 $obj->load->helper('string');
 
-$obj->load->model('pagesModel');
+$obj->load->model('captchaModel');
 
 $vals = array(
-		'word'		 => random_string('alpha', 6),
+	'word'		 => random_string('alpha', 6),
         'img_path'	 => './captcha/',
         'img_url'	 => base_url().'captcha/',
         'font_path'  => './system/fonts/arial.ttf',
@@ -19,8 +19,8 @@ $vals = array(
         );
 
 $cap = create_captcha($vals);
-$cap['ip'] = $obj->input->ip_address();
-$obj->pagesModel->insertCaptcha($cap);
+$cap['ip'] = $obj->input->ip_address(); 
+$obj->captchaModel->insertCaptcha($cap);
 
 return $cap['image'];
 

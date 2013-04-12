@@ -46,6 +46,7 @@ class Page extends CI_Controller {
 
 			// Check to see if anything was returned, and if so continue
 			if(sizeof($thisPage)) {
+				// echo "HI";
 				$thisTemplate = $thisPage['templateName'];
 
 				// Step 2 - Now lets get the template view filename from the templates table
@@ -84,7 +85,8 @@ class Page extends CI_Controller {
 				//print_r($this->mylibrary->getCountries());
 				$this->load->view('templates/' . $thisTemplate . '/' . $thisView, $data);
 			} else {
-				redirect('');
+				echo "Not Found!!";
+				redirect('/notfound');
 			}
 		} else {
 			echo "CMS misconfiguration: Invalid index definition";

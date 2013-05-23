@@ -42,11 +42,9 @@
 $route['default_controller'] = 'page';
 $route['404_override'] = '';
 $route['dash'] = 'dash';							// Redirects to dash/index, special case
-$route['dash/(:any)'] = 'dash/$1';		// This is just here to override the next rule to allow dashboard access
-$route['page/contactus'] = 'page/contactus';
-$route['page/register'] = 'page/register';
+$route['dash/(:any)'] = 'dash/$1';		// This is just here to override the next rules to allow dashboard access
+$route['page/(:any)'] = 'page/$1';		// This is just here to override the next rules to allow page controller access
 $route['(:any)'] = 'page/index/$1';		// Redirects ALL traffic to the page controller
-
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

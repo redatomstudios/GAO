@@ -1,0 +1,76 @@
+/* General page styles */
+
+body {
+	font-family: "Advent Pro", Arial, Verdana, sans-serif;
+	line-height: 1.5em;
+	text-rendering: geometricPrecision;
+}
+
+a, a:active, a:visited {
+	text-decoration: none;
+	color: inherit;
+	display: block;
+	opacity: 0.8;
+}
+
+a:hover {
+	opacity: 1;
+}
+
+h2, h3 {
+	font: 1.5em "Advent Pro", Arial, Verdana, sans-serif;
+	font-weight: 600;
+	letter-spacing: 1px;
+	border-bottom: solid thin rgba(0, 0, 0, 0.05);
+	margin-bottom: 10px;
+	padding: 5px 10px;
+	background: #147BC2;
+	color: #FFF;
+	text-transform: uppercase;
+	position: relative;
+}
+
+#pageWrap {
+	width: 978px;
+	margin: 0 auto;
+}
+
+.clear:after {
+	content: '.';
+	display: block;
+	clear: both;
+	height: 0;
+	visibility: hidden;
+	overflow: hidden;
+}
+
+strong {
+	font-weight: bold;
+}
+
+.editTrigger {
+	position: absolute;
+	text-transform: none;
+	font-size: 14px;
+	right: 0;
+	line-height: 20px;
+	padding: 5px 10px;
+	border-bottom-left-radius: 5px;
+	cursor: pointer;
+	padding-left: 30px;
+	/*background: url('resources/images/straightedge/editPen.png') 9px center no-repeat;*/
+	background: url('../images/editPen.png') 9px center no-repeat;
+	opacity: 0.99;
+}
+
+#charityName .editTrigger {
+	right: auto;
+	line-height: 10px;
+}
+
+.slideHeader .editTrigger {
+	background-color: rgba(0, 0, 0, 0.7);
+	color: #FFF;
+	padding-right: 20px;
+	top: 0;
+}

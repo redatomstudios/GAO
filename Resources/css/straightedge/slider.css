@@ -1,0 +1,18 @@
+/* liteSlide styles */
+
+.liteSlide {
+	margin-bottom: 30px;
+	width: 100%;
+	height: 382px;
+	overflow: hidden;
+}
+
+.liteSlide li {
+	float: left;
+	width: 100%;
+	height: 100%;
+	background-size: 100%;
+	background-position: center center;
+	opacity: 0;
+	display: none;
+}

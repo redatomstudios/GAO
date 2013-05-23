@@ -1,0 +1,301 @@
+/* Donate Button & Progressbar */
+
+#donationStatus {
+	margin: 10px 0;
+}
+
+#donationStatus #donateButton {
+	width: 190px;
+	height: 45px;
+	line-height: 45px;
+	background: #3C0;
+	color: #FFF;
+	text-transform: uppercase;
+	text-align: center;
+	cursor: pointer;
+	font-size: 20px;
+	font-weight: 600;
+	box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.2);
+	float: left;
+	-webkit-transition: all 0.1s linear;
+	-moz-transition: all 0.1s linear;
+	-o-transition: all 0.1s linear;
+	transition: all 0.1s linear;
+}
+
+#donationStatus #donateButton:hover {
+	box-shadow: none;
+}
+
+#donationStatus #donateButton:active {
+	box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.4);
+	color: #EEE;
+}
+
+#progressIndicatorWrapper {
+	height: 45px;
+	box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.2);
+	width: 778px;
+	float: right;
+}
+
+#progressIndicatorWrapper #progressIndicator {
+	width: 52%;
+	float: left;
+	height: 100%;
+	background: #147BC2;
+	text-align: right;
+	line-height: 45px;
+	font-size: 20px;
+	color: #FFF;
+	position: relative;
+	-webkit-transition: all 0.3s linear;
+	-moz-transition: all 0.3s linear;
+	-o-transition: all 0.3s linear;
+	transition: all 0.3s linear;
+}
+
+#progressIndicatorWrapper #progressIndicator:after {
+	content: '  ';
+	height: 100%;
+	width: 10px;
+	display: block;
+	float: right;
+}
+
+#progressIndicatorWrapper #progressIndicator #progressTooltip {
+	position: absolute;
+	opacity: 0;
+	top: 60px;
+  width: 156px;
+	margin-right: -88px;
+	right: 0;
+	background: #147BC2;
+	padding: 0 10px;
+	text-align: center;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+	-webkit-transition: all 0.3s linear;
+	-moz-transition: all 0.3s linear;
+	-o-transition: all 0.3s linear;
+	transition: all 0.3s linear;
+	z-index: 100;
+}
+
+#progressIndicatorWrapper #progressIndicator:hover #progressTooltip {
+	opacity: 1;
+}
+
+#progressIndicatorWrapper #progressTooltip:before {
+	content: '';
+	width: 0;
+	height: 0;
+	display: block;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-bottom: 10px solid #147BC2;
+	position: absolute;
+	top: -10px;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+}
+
+/* Donor List */
+
+.slideHeader {
+	position: relative;
+}
+
+#donorList {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 190px;
+	height: 100%;
+	overflow: hidden;
+	background: rgba(0, 0, 0, 0.9);
+	color: #FFF;
+	-webkit-transition: all 0.2s linear;
+	-moz-transition: all 0.2s linear;
+	-o-transition: all 0.2s linear;
+	transition: all 0.2s linear;
+}
+
+#donorList.expanded {
+	width: 100%;
+}
+
+#donorList h4 {
+	text-transform: uppercase;
+	text-align: center;
+	font-weight: bold;
+	height: 45px;
+	line-height: 45px;
+}
+
+#donorList ul {
+	height: 300px;
+	overflow: hidden;
+}
+
+#donorList.expanded ul {
+	overflow: auto;
+}
+
+#donorList li {
+	padding: 5px 10px;
+	line-height: 1.2em;
+	height: 40px;
+	border-bottom: solid thin rgba(255, 255, 255, 0.1);
+	width: 170px;
+	float: left;
+	cursor: default;
+
+	background: rgba(0, 0, 0, 0);
+	-webkit-transition: all 0.1s linear;
+	-moz-transition: all 0.1s linear;
+	-o-transition: all 0.1s linear;
+	transition: all 0.1s linear;
+}
+
+#donorList li:hover {
+	background: rgba(0, 0, 0, 1);
+}
+
+.donationAmount {
+	font-size: 20px;
+}
+
+.donationAmount:before {
+	content: '$';
+}
+
+.donorName:before {
+	content: 'by ';
+}
+
+
+#donorList #donorListTrigger {
+	width: 100%;
+	opacity: 0.7;
+	text-align: center;
+	height: 37px;
+	line-height: 37px;
+	cursor: pointer;
+	-webkit-transition: all 0.1s linear;
+	-moz-transition: all 0.1s linear;
+	-o-transition: all 0.1s linear;
+	transition: all 0.1s linear;
+	background: rgba(0, 0, 0, 0);
+}
+
+#donorList #donorListTrigger:hover {
+	opacity: 1;
+	background: rgba(0, 0, 0, 1);
+}
+/* Content styles */
+
+.bodyContent {
+	width: 700px;
+	float: left;
+	font-weight: 300;
+	color: #1396B6;
+	color: #000;
+	font-size: 1em;
+	line-height: 1.3em;
+	letter-spacing: 1px;
+}
+
+.bodyContent p {
+	margin-bottom: 15px;
+}
+
+.bodyContent b {
+	font-weight: bold;
+}
+
+.sideContent {
+	float: right;
+	width: 250px;
+}
+
+/* Gallery Styles */
+.imageGallery li {
+	border: solid 5px white;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+	height: 100px;
+	width: 100px;
+	float: left;
+	margin: 10px;
+	cursor: pointer;
+	position: relative;
+	overflow: hidden;
+	text-align: center;
+
+	-webkit-transition: all 0.05s linear;
+	-moz-transition: all 0.05 linear;
+	-o-transition: all 0.05 linear;
+	transition: all 0.05 linear;
+}
+
+.imageGallery li:hover {
+	box-shadow: 0 1px 7px rgba(0, 0, 0, 0.2);
+	height: 110px;
+	margin: 5px 10px;
+}
+
+/* Editing forms styles */
+
+.modalForm {
+	width: 600px;
+	display: none;
+}
+
+form {
+	display: table;
+	width: 800px;
+	margin: 0 auto;
+}
+
+form .formBlock {
+	display: table-row;
+}
+
+.formBlock.spaced .elemLabel, .formBlock.spaced .element {
+	padding-bottom: 70px;
+}
+
+.formBlock .elemLabel, .formBlock .element {
+	display: table-cell;
+	vertical-align: middle;
+	height: 100%;
+}
+
+.formBlock .elemLabel {
+	padding: 20px;
+	width: 30%;
+	text-align: right;
+}
+
+.elemLabel label {
+	font-weight: bold;
+}
+
+.elemHint {
+	display: none;
+}
+
+.element > * {
+	width: 400px;
+	padding: 10px;
+	font: inherit;
+}
+
+.element > textarea {
+	min-height: 300px;
+	resize: vertical;
+}
+
+.element > input[type="submit"], .element > input[type="button"], .element select {
+	width: 100px;
+}

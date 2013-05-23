@@ -19,6 +19,12 @@ class TemplatesModel extends CI_Model{
 		return array();
 	}
 
+	public function getFundraiserTemplates(){
+		$res = $this->db->get_where('templates', array('fundraiserTemplate' => 1));
+		return ($res->num_rows() > 0) ? $res->result_array() : array();
+	}
+
+
 	public function getTemplate($id){
 		# code...
 		$res = $this->db->get_where('templates', array('id' => $id));
@@ -32,10 +38,10 @@ class TemplatesModel extends CI_Model{
 		# code...
 		if($this->db->insert('templates', $data)){
 
-			$query = 'CREATE TABLE '. $data['tableName'] . '( id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT, 
-				pageTitle varchar(50), 
-				pageName varchar(50) NOT NULL UNIQUE KEY, 
-				pageHeading varchar(50), 
+			$query = 'CREATE TABLE '. $data['tableName'] . '( id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+				pageTitle varchar(50),
+				pageName varchar(50) NOT NULL UNIQUE KEY,
+				pageHeading varchar(50),
 				`timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, ';
 			foreach ($fields as $field) {
 				$query .= $field['fieldName'] . ' ' . $field['fieldType'] ;
@@ -59,15 +65,18 @@ class TemplatesModel extends CI_Model{
 		# code...
 		//echo "</br>" . $templateId . "   " . $templateTableName . "Removing" ;
 		$this->db->where('id', $templateId);
-		$this->db->delete('templates'); 
+		$this->db->delete('templates');
 
 		// Remove pages associated with this template from the PAGES table
 		$this->db->where('templateName', $templateTableName);
-		$this->db->delete('pages'); 
+		$this->db->delete('pages');
 
 		$this->db->query("drop table $templateTableName");
 	}
 
-	
+	public function insertTemplate($templateTableName, $data){
+
+		$this->db->insert($templateTableName, $data);
+	}
 
 }

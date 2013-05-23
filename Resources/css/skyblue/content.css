@@ -63,7 +63,7 @@ form .formBlock {
 	display: none;
 }
 
-.element > * {
+.element > input, .element > select, .element > textarea {
 	width: 80%;
 	padding: 10px;
 	font: inherit;

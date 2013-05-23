@@ -22,14 +22,16 @@
 						<td><?= $thisTemplate['templateName'] ?></td>
 						<td><?= $thisTemplate['timestamp'] ?></td>
 						<?php 
-						if(sizeof($thisTemplate['pageDetails']) == 0)
+						if(sizeof($thisTemplate['pageDetails']) == 0) {
 							$pages = 'None';
-						else{
+						} else {
+							$pages = array();
 							foreach ($thisTemplate['pageDetails'] as $page) {
 								# code...
-								$pages[] = $page['pageName'];
+								array_push($pages, $page['pageName']);
+								// $pages[] = $page['pageName'];
 							}
-							$pages = implode(',', $pages);
+							$pages = implode(', ', $pages);
 						}
 						?>
 						<td><?= $pages ?></td>

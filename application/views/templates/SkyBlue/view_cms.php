@@ -24,7 +24,7 @@
 							<input type="text" name="pageHeading" id="pageHeading" <?= (isset($pageHeading)?"value=\"$pageHeading\"":"placeholder=\"Heading that shows up on the page\"") ?> />
 						</td>
 						<td>
-
+							
 						</td>
 					</tr>
 					<tr>
@@ -35,7 +35,7 @@
 							<input type="text" name="pageTitle" id="pageTitle" <?= (isset($pageTitle)?"value=\"$pageTitle\"":"placeholder=\"Title that is prepended in the tab/window\"") ?> />
 						</td>
 						<td>
-
+							
 						</td>
 					</tr>
 					<tr>
@@ -46,7 +46,7 @@
 							<input type="text" name="pageGroup" id="pageGroup" <?= (isset($pageGroup)?"value=\"$pageGroup\"":"placeholder=\"Navigation group, usually the same as the Page Name\"") ?> />
 						</td>
 						<td>
-
+							
 						</td>
 					</tr>
 					<tr>
@@ -57,7 +57,7 @@
 							<input type="text" name="navOrder" id="navOrder" <?= (isset($navOrder)?"value=\"$navOrder\"":"placeholder=\"Navigation order, 1 is at the top. Use 0 to exclude from the navigation.\"") ?> />
 						</td>
 						<td>
-
+							
 						</td>
 					</tr>
 					<tr>

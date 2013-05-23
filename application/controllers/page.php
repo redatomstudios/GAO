@@ -46,7 +46,6 @@ class Page extends CI_Controller {
 
 			// Check to see if anything was returned, and if so continue
 			if(sizeof($thisPage)) {
-				// echo "HI";
 				$thisTemplate = $thisPage['templateName'];
 
 				// Step 2 - Now lets get the template view filename from the templates table
@@ -85,8 +84,7 @@ class Page extends CI_Controller {
 				//print_r($this->mylibrary->getCountries());
 				$this->load->view('templates/' . $thisTemplate . '/' . $thisView, $data);
 			} else {
-				echo "Not Found!!";
-				redirect('/notfound');
+				redirect('');
 			}
 		} else {
 			echo "CMS misconfiguration: Invalid index definition";
@@ -102,8 +100,8 @@ class Page extends CI_Controller {
 		$this->load->model('pagesModel');
 		$this->load->model('captchaModel');
 
-		if($post = $this->input->post()){
-			$word = $post['captcha'];
+		if($get = $this->input->get()){
+			$word = $get['captcha'];
 			$ip = $this->input->ip_address();
 			$this->captchaModel->deleteCaptchas();
 			if($this->captchaModel->checkCaptcha($word, $ip)) {
@@ -115,7 +113,7 @@ class Page extends CI_Controller {
 		else{
 			$this->load->helper('captcha');
 			$this->load->helper('string');
-			
+
 
 			$vals = array(
 				'word'		 => random_string('alpha', 6),
@@ -125,7 +123,7 @@ class Page extends CI_Controller {
         'size'  => '20',
         'img_width'	 => '270',
         'img_height' => '50',
-        'border' => 1, 
+        'border' => 1,
         'expiration' => 7200
       );
 
@@ -138,24 +136,45 @@ class Page extends CI_Controller {
 		}
 	}
 
-	public function register(){
-		$this->load->model('userModel');
-		$this->load->model('usercontrolModel');
-		$post = $this->input->post();
-		$user['username'] = $post['username'];
-		$user['passcode'] = $post['password'];
-		unset($post['confirmPassword']);
-		// unset($post['username']);
-		unset($post['confirmEmail']);
-		unset($post['charityName']);
-		unset($post['eventDescription']);
-		unset($post['captcha']);
-		unset($post['password']);
-		$this->userModel->addUser($post);
-		$this->usercontrolModel->createUser($user);
 
-		$message = 'Hi there,\n You have been registered!!!';
-		mail($post['email'], 'Registration @ GAO', $message);
+	public function register(){
+
+		$this->load->model('templatesmodel');
+		$this->load->model('fundusercontrolmodel');
+	 	$this->load->model('funduserdetailsmodel');
+
+		$get = $this->input->get();
+
+
+		$templateData['fundraiserName'] = $get['fundraiserName'];
+		$templateData['charityName'] = $get['charityName'];
+		$templateData['description'] = $get['eventDescription'];
+
+		$userdetailData['title'] = $get['title'];
+		$userdetailData['firstName'] = $get['firstName'];
+		$userdetailData['lastName'] = $get['lastName'];
+		$userdetailData['username'] = $get['username'];
+		$userdetailData['email'] = $get['email'];
+		$userdetailData['country'] = $get['country'];
+		$userdetailData['houseNumber'] = $get['houseNumber'];
+		$userdetailData['postalCode'] = $get['postalCode'];
+
+		$this->funduserdetailsmodel->createUser($userdetailData);
+
+
+		$usercontrolData['username'] = $get['username'];
+		$usercontrolData['passcode'] = $get['password'];
+
+		$this->fundusercontrolmodel->createUser($usercontrolData);
+
+		$templates = $this->templatesmodel->getFundraiserTemplates();
+
+		foreach ($templates as $template) {
+			$this->templatesmodel->insertTemplate($template['tableName'], $templateData);
+		}
+
+
+		echo '{"response": "success"}';
 	}
 
 	private function createNav() {
@@ -175,6 +194,100 @@ class Page extends CI_Controller {
 
 		return $navPages;
 	}
+
+	public function catchMe(){
+
+
+		$get = $this->input->get();
+
+
+
+
+
+
+		$returnString = '{"errorMessages": [';
+        foreach ($errors as $key => $value) {
+        		$returnString .= '{"fieldName": "' . $key . '","errorMessage": "' . $value . '"},';
+        }
+
+        $returnString = rtrim($returnString, ",");
+
+        $returnString .= '],"response": "' . (sizeof($errors) > 0 ? 'failure' : 'success') . '"}';
+
+		echo $returnString;
+
+	}
+
+	public function registerValidation2(){
+
+		$this->load->model('captchaModel');
+
+		$get = $this->input->get();
+
+		$errors = array();
+
+		$word = $get['captcha'];
+		$ip = $this->input->ip_address();
+		$this->captchaModel->deleteCaptchas();
+		if(!$this->captchaModel->checkCaptcha($word, $ip)) {
+			 $errors['captcha'] = 'Wrong Captcha';
+		}
+
+		if(!strlen($get['charityName'])) {
+		    $errors['charityName'] = 'No Charity Name Given';
+		}
+
+		if(!strlen($get['fundraiserName'])) {
+		    $errors['fundraiserName'] = 'No Fundraiser Name Given';
+		}
+
+		if(!preg_match('/^[\w][\W|\w]{5,11}$/', $get['password'])) {
+		    $errors['password'] = "Invalid password\n Should be within 6-12 characters\n Should start with a character, digit or _";
+		}
+
+		foreach ($post as $key => $value) {
+			$post[$key] = trim($value);
+		}
+
+		if(empty($post['firstName']) && !preg_match('#^[A-Z \'.-]{2,20}$#i', $post['firstName'])) {
+		    $errors['firstName'] = "First Name must be 2-20 characters (A-Z \' . -).";
+		}
+
+		if(empty($post['lastName']) && !preg_match('#^[A-Z \'.-]{2,20}$#i', $post['lastName'])) {
+		    $errors['lastName'] = "Last Name must be 2-20 characters (A-Z \' . -).";
+		}
+
+		if(!preg_match('/^[a-zA-Z]\w{5,}$/', $post['username'])){
+			$errors['username'] = 'Invalid username\n Should start with a character\n Should contain only characters, digits or _';
+		}
+
+		if(!(filter_var($get['email'], FILTER_VALIDATE_EMAIL))) {
+		    $errors['email'] = "Invalid email address.";
+		}
+
+		if($get['email'] != $get['confirmEmail']){
+			$errors['confirmEmail'] = "Email mismatch";
+		}
+
+		if($get['password'] != $get['confirmPassword']){
+			$errors['confirmPassword'] = "Password mismatch";
+		}
+
+
+
+		$returnString = '{"errorMessages": [';
+        foreach ($errors as $key => $value) {
+        		$returnString .= '{"fieldName": "' . $key . '","errorMessage": "' . $value . '"},';
+        }
+
+        $returnString = rtrim($returnString, ",");
+
+        $returnString .= '],"response": "' . (sizeof($errors) > 0 ? 'failure' : 'success') . '"}';
+
+		echo $returnString;
+	}
+
+
 
 
 }

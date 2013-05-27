@@ -42,6 +42,10 @@ class PagesModel extends CI_Model{
 		$this->db->insert($table, $post);
 	}
 
+	public function createFundPage($page){
+		$this->db->insert('pages', $page);
+	}
+
 	public function getPage($pageName){
 		# code...
 		$res = $this->db->get_where('pages', array('pageName' => $pageName));
@@ -65,7 +69,7 @@ class PagesModel extends CI_Model{
 					$res['templateId'] = $templateId;
 					$res['pageGroup'] = $pageGroup;
 					$res['navOrder'] = $navOrder;
-					
+
 					return $res;
 				}
 			}
@@ -78,7 +82,7 @@ class PagesModel extends CI_Model{
 		foreach($post as $i => $field) {
 			$post[$i] = htmlentities($post[$i]);
 		}
-		
+
 		$pageName = $post['pageName'];
 		$page['pageTitle'] = $post['pageTitle'];
 		$page['pageGroup'] = $post['pageGroup'];

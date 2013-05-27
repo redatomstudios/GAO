@@ -51,7 +51,8 @@ class Page extends CI_Controller {
 				// Step 2 - Now lets get the template view filename from the templates table
 				$thisPage = $this->db->get_where('templates', array('templateName' => $thisTemplate));
 				$thisPage = $thisPage->row_array();
-				$thisView = $thisPage['userView'];
+				$thisView = ($this->isLoggedIn($requestPage)?$thisPage['cmsView']:$thisPage['userView']);
+				// $thisView = $thisPage['userView'];
 
 				// Step 3 - Get the associated page data from the database
 				$pageData = $this->db->get_where($thisTemplate, array('pageName' => $requestPage));
@@ -84,7 +85,7 @@ class Page extends CI_Controller {
 				//print_r($this->mylibrary->getCountries());
 				$this->load->view('templates/' . $thisTemplate . '/' . $thisView, $data);
 			} else {
-				redirect('');
+				// redirect('');
 			}
 		} else {
 			echo "CMS misconfiguration: Invalid index definition";
@@ -136,19 +137,105 @@ class Page extends CI_Controller {
 		}
 	}
 
+	private function validateRegistration(){
+		$this->load->model('captchaModel');
+		$this->load->model('fundusercontrolModel');
+
+		$get = $this->input->get();
+
+		$errors = array();
+
+		if($this->fundusercontrolModel->getUser($get['username'])){
+			 $errors['username'] = 'Username already exists';
+		}
+
+		$word = $get['captcha'];
+		$ip = $this->input->ip_address();
+		$this->captchaModel->deleteCaptchas();
+		if(!$this->captchaModel->checkCaptcha($word, $ip)) {
+			 $errors['captcha'] = 'Wrong Captcha';
+		}
+
+		if(!strlen($get['charityName'])) {
+		    $errors['charityName'] = 'No Charity Name Given';
+		}
+
+		if(!strlen($get['fundraiserName'])) {
+		    $errors['fundraiserName'] = 'No Fundraiser Name Given';
+		}
+
+		if(!preg_match('/^[\w][\W|\w]{5,}$/', $get['password'])) {
+		    $errors['password'] = "Password should be at least 6 characters and should start with a character, digit or _";
+		}
+
+		foreach ($get as $key => $value) {
+			$get[$key] = trim($value);
+		}
+
+		if(empty($get['firstName']) && !preg_match('#^[A-Z \'.-]{2,50}$#i', $get['firstName'])) {
+		    $errors['firstName'] = "First Name must be at least 2 characters (A-Z \' . -).";
+		}
+
+		if(empty($get['lastName']) && !preg_match('#^[A-Z \'.-]{2,50}$#i', $get['lastName'])) {
+		    $errors['lastName'] = "Last Name must at least 2 characters (A-Z \' . -).";
+		}
+
+		if(!preg_match('/^[a-zA-Z]\w{5,}$/', $get['username'])){
+			$errors['username'] = "Username should start with a character and should contain only characters, digits or _";
+		}
+
+		if(!(filter_var($get['email'], FILTER_VALIDATE_EMAIL))) {
+		    $errors['email'] = "Invalid email address.";
+		}
+
+		if($get['email'] != $get['confirmEmail']){
+			$errors['confirmEmail'] = "Email must match with confirmed email.";
+		}
+
+		if($get['password'] != $get['confirmPassword']){
+			$errors['confirmPassword'] = "Password must match with confirmed password.";
+		}
+
+
+
+		$returnString = '{"errorMessages": [';
+
+    foreach ($errors as $key => $value) {
+    		$returnString .= '{"fieldName": "' . $key . '","errorMessage": "' . $value . '"},';
+    }
+
+    $returnString = rtrim($returnString, ",");
+
+    $returnString .= '],"response": "' . (sizeof($errors) > 0 ? 'failure' : 'success') . '"}';
+
+		// echo $returnString;
+		return array(
+			"status" 			=> (sizeof($errors) > 0 ? false : true),
+			"statusString" 	=> $returnString
+		);
+	}
 
 	public function register(){
+
+		$validation = $this->validateRegistration();
+
+		if(!$validation["status"]) {
+			echo json_encode($validation);
+			return false;
+		}
 
 		$this->load->model('templatesmodel');
 		$this->load->model('fundusercontrolmodel');
 	 	$this->load->model('funduserdetailsmodel');
+	 	$this->load->model('pagesmodel');
 
 		$get = $this->input->get();
 
+		$page['pageName'] = $get['username'];
+		$page['pageTitle'] = $get['fundraiserName'] . ', fundraising for ' . $get['charityName'];
+		$page['templateName'] = 'straightedge';
 
-		$templateData['fundraiserName'] = $get['fundraiserName'];
-		$templateData['charityName'] = $get['charityName'];
-		$templateData['description'] = $get['eventDescription'];
+		$this->pagesmodel->createFundPage($page);
 
 		$userdetailData['title'] = $get['title'];
 		$userdetailData['firstName'] = $get['firstName'];
@@ -169,20 +256,39 @@ class Page extends CI_Controller {
 
 		$templates = $this->templatesmodel->getFundraiserTemplates();
 
+		$templateData['fundraiserName'] = $get['fundraiserName'];
+		$templateData['charityName'] = $get['charityName'];
+		$templateData['description'] = $get['eventDescription'];
+		$templateData['pageName'] = $get['username'];
+
 		foreach ($templates as $template) {
 			$this->templatesmodel->insertTemplate($template['tableName'], $templateData);
 		}
 
+		$this->login($get['username']);
+		echo '{"status": "success", "redirectUrl": "/' . $templateData['pageName'] . '"}';
+	}
 
-		echo '{"response": "success"}';
+	public function login($username)	{
+		$this->session->set_userdata(array(
+			'sessionID' => random_string('alnum', 16),
+			'username'=>$username,
+			'usertype' => 'user'));
+	}
+
+	public function isLoggedIn($username){
+		# code...
+		if($this->session->userdata('username') == $username)
+			return true;
+		return false;
 	}
 
 	private function createNav() {
-	/*
-	 * This function pulls data from the pages table
-	 * and keeps the pages with a navOrder > 0.
-	 * Then it returns an array such that [[pageName, pagePath]]
-	 */
+		/*
+		 * This function pulls data from the pages table
+		 * and keeps the pages with a navOrder > 0.
+		 * Then it returns an array such that [[pageName, pagePath]]
+		 */
 								$this->db->order_by('navOrder', 'asc');
 		$allPages = $this->db->get('pages');
 		$navPages = array();
@@ -194,101 +300,5 @@ class Page extends CI_Controller {
 
 		return $navPages;
 	}
-
-	public function catchMe(){
-
-
-		$get = $this->input->get();
-
-
-
-
-
-
-		$returnString = '{"errorMessages": [';
-        foreach ($errors as $key => $value) {
-        		$returnString .= '{"fieldName": "' . $key . '","errorMessage": "' . $value . '"},';
-        }
-
-        $returnString = rtrim($returnString, ",");
-
-        $returnString .= '],"response": "' . (sizeof($errors) > 0 ? 'failure' : 'success') . '"}';
-
-		echo $returnString;
-
-	}
-
-	public function registerValidation2(){
-
-		$this->load->model('captchaModel');
-
-		$get = $this->input->get();
-
-		$errors = array();
-
-		$word = $get['captcha'];
-		$ip = $this->input->ip_address();
-		$this->captchaModel->deleteCaptchas();
-		if(!$this->captchaModel->checkCaptcha($word, $ip)) {
-			 $errors['captcha'] = 'Wrong Captcha';
-		}
-
-		if(!strlen($get['charityName'])) {
-		    $errors['charityName'] = 'No Charity Name Given';
-		}
-
-		if(!strlen($get['fundraiserName'])) {
-		    $errors['fundraiserName'] = 'No Fundraiser Name Given';
-		}
-
-		if(!preg_match('/^[\w][\W|\w]{5,11}$/', $get['password'])) {
-		    $errors['password'] = "Invalid password\n Should be within 6-12 characters\n Should start with a character, digit or _";
-		}
-
-		foreach ($post as $key => $value) {
-			$post[$key] = trim($value);
-		}
-
-		if(empty($post['firstName']) && !preg_match('#^[A-Z \'.-]{2,20}$#i', $post['firstName'])) {
-		    $errors['firstName'] = "First Name must be 2-20 characters (A-Z \' . -).";
-		}
-
-		if(empty($post['lastName']) && !preg_match('#^[A-Z \'.-]{2,20}$#i', $post['lastName'])) {
-		    $errors['lastName'] = "Last Name must be 2-20 characters (A-Z \' . -).";
-		}
-
-		if(!preg_match('/^[a-zA-Z]\w{5,}$/', $post['username'])){
-			$errors['username'] = 'Invalid username\n Should start with a character\n Should contain only characters, digits or _';
-		}
-
-		if(!(filter_var($get['email'], FILTER_VALIDATE_EMAIL))) {
-		    $errors['email'] = "Invalid email address.";
-		}
-
-		if($get['email'] != $get['confirmEmail']){
-			$errors['confirmEmail'] = "Email mismatch";
-		}
-
-		if($get['password'] != $get['confirmPassword']){
-			$errors['confirmPassword'] = "Password mismatch";
-		}
-
-
-
-		$returnString = '{"errorMessages": [';
-        foreach ($errors as $key => $value) {
-        		$returnString .= '{"fieldName": "' . $key . '","errorMessage": "' . $value . '"},';
-        }
-
-        $returnString = rtrim($returnString, ",");
-
-        $returnString .= '],"response": "' . (sizeof($errors) > 0 ? 'failure' : 'success') . '"}';
-
-		echo $returnString;
-	}
-
-
-
-
 }
 ?>

@@ -22,4 +22,13 @@ class FundusercontrolModel extends CI_Model{
 			return true;
 		return false;
 	}
+
+	public function getUser($username){
+		$res = $this->db->get_where('fundusercontrol', array('username' => $username));
+		if($res->num_rows() > 0){
+			return $res->row_array();
+		}
+
+		return false;
+	}
 }

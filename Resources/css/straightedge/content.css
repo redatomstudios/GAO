@@ -220,6 +220,13 @@
 }
 
 /* Gallery Styles */
+.imageGallery {
+	max-height: 390px;
+	overflow-y: auto;
+	clear: both;
+	margin-bottom: 150px;
+}
+
 .imageGallery li {
 	border: solid 5px white;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
@@ -236,6 +243,25 @@
 	-moz-transition: all 0.05 linear;
 	-o-transition: all 0.05 linear;
 	transition: all 0.05 linear;
+}
+
+.imageGallery li a {
+	height: 100%;
+	width: 100%;
+}
+
+.imageGallery .imgPreview {
+	height: 100%;
+	width: 100%;
+	background-size: cover;
+}
+
+.imageGallery li input[type='checkbox'] {
+	position: absolute;
+	top: 3px;
+	right: 3px;
+	margin: 0;
+	clear: both;
 }
 
 .imageGallery li:hover {
@@ -298,4 +324,9 @@ form .formBlock {
 
 .element > input[type="submit"], .element > input[type="button"], .element select {
 	width: 100px;
+}
+
+/* File uploader styles */
+.fUpload.container {
+	padding: 30px 8px;
 }

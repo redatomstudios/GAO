@@ -1,5 +1,10 @@
 /* General page styles */
 
+/* Bootstrap override */
+.container {
+	width: auto;
+}
+
 body {
 	font-family: "Advent Pro", Arial, Verdana, sans-serif;
 	line-height: 1.5em;
@@ -57,15 +62,30 @@ strong {
 	padding: 5px 10px;
 	border-bottom-left-radius: 5px;
 	cursor: pointer;
-	padding-left: 30px;
+	/*padding-left: 30px;*/
 	/*background: url('resources/images/straightedge/editPen.png') 9px center no-repeat;*/
-	background: url('../images/editPen.png') 9px center no-repeat;
+	/*background: url('../images/editPen.png') 9px center no-repeat;*/
 	opacity: 0.99;
+}
+
+.editTrigger a {
+	display: inline-block;
+}
+
+.editTriggerEdit {
+	padding-left: 30px;
+	background: url('images/editPen.png') 9px center no-repeat;
+}
+
+.editTriggerAdd {
+	padding-left: 30px;
+	background: url('images/addPlus.png') 9px center no-repeat;
 }
 
 #charityName .editTrigger {
 	right: auto;
-	line-height: 10px;
+	line-height: 16px;
+	margin-top: -3px;
 }
 
 .slideHeader .editTrigger {
@@ -73,4 +93,5 @@ strong {
 	color: #FFF;
 	padding-right: 20px;
 	top: 0;
+	width: 105px;
 }

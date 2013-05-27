@@ -76,3 +76,14 @@ form .formBlock {
 .element > input[type="submit"] {
 	width: 326px;
 }
+
+.element .highlighted {
+	border: solid thin #F22;
+	box-shadow: inset 0 0 5px rgba(255, 0, 0, 0.5);
+	outline: none;
+}
+
+.highlighted:focus {
+	outline: none;
+	box-shadow: none;
+}

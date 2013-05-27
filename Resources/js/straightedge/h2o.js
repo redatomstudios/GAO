@@ -56,5 +56,12 @@ jQuery(document).ready(function() {
 		donorList.toggleClass('expanded');
 	});
 
-	editTrigger.nm();
+	if(editTrigger.get(0)) {
+		editTrigger.nm();
+
+		// Code to move the file upload plugin around
+		var $fUpload = $('.fUpload.container');
+
+		console.log($fUpload);
+	}
 });

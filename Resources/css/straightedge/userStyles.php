@@ -6,7 +6,7 @@
 // $CSSToInclude = array("reset.css", "general.css", "header.css", "slider.css", "content.css", "footer.css", "nyroModal.css");
 
 $CSS_Dir = "resources/css/straightedge/";	// Directory where the CSS files are placed
-$CSSToInclude = array("bootstrap.min.css", "style.css", "bootstrap-responsive.min.css", "bootstrap-image-gallery.min.css", "jquery.fileupload-ui.css", "reset.css", "nyroModal.css", "general.css", "header.css", "sidebar.css", "slider.css", "content.css", "footer.css", "slimbox2.css");
+$CSSToInclude = array("reset.css", "general.css", "header.css", "sidebar.css", "slider.css", "content.css", "footer.css", "slimbox2.css");
 
 echo '<style>';
 foreach($CSSToInclude as $CSSFile) {

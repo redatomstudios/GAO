@@ -47,7 +47,8 @@ class Dash extends CI_Controller {
 			if($authStatus) {
 				$this->session->set_userdata(array(
 					'sessionID' => random_string('alnum', 16),
-					'username' => $uname
+					'username' => $uname,
+					'usertype' => 'admin'
 				));
 
 				redirect('dash');

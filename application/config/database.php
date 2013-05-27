@@ -48,10 +48,10 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = '';
-$db['default']['database'] = 'gao';
+$db['default']['hostname'] = 'mysql1099.servage.net';
+$db['default']['username'] = 'giveasone';
+$db['default']['password'] = 'giveasoneDB123';
+$db['default']['database'] = 'giveasone';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

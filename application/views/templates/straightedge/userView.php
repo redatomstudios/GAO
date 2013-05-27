@@ -2,19 +2,11 @@
 <html>
 <head>
 	<title>Personal Charity Fundraisers :: Give As One</title>
-	<link href='http://fonts.googleapis.com/css?family=Poiret+One|Advent+Pro:400,600|Prosto+One|Roboto+Condensed:400,300' rel='stylesheet' type='text/css'>
-	<link href="css/reset.css" rel="stylesheet" />
-	<link href="css/general.css" rel="stylesheet" />
-	<link href="css/header.css" rel="stylesheet" />
-	<link href="css/sidebar.css" rel="stylesheet" />
-	<link href="css/slider.css" rel="stylesheet" />
-	<link href="css/content.css" rel="stylesheet" />
-	<link href="css/footer.css" rel="stylesheet" />
-	<link href="css/slimbox2.css" rel="stylesheet" />
+	<link href='http://fonts.googleapis.com/css?family=Advent+Pro:400,600|Roboto+Condensed:400,300' rel='stylesheet' type='text/css'>
+	<?php require 'resources/css/straightedge/userStyles.php'; ?>
 
-	<script src="js/jquery.1.9.0.min.js"></script>
-	<script src="js/slimbox2.js"></script>
-	<script src="js/h2o.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<?php require 'resources/js/straightedge/userScripts.php'; ?>
 </head>
 <body>
 	<header>

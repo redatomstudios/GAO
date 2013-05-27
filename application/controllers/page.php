@@ -301,4 +301,9 @@ class Page extends CI_Controller {
 		return $navPages;
 	}
 }
+
+
+//This is for testing git-ftp
 ?>
+
+
